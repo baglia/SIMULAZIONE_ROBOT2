@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class Form1
+Partial Class Main
     Inherits System.Windows.Forms.Form
 
     'Form esegue l'override del metodo Dispose per pulire l'elenco dei componenti.
@@ -29,6 +29,7 @@ Partial Class Form1
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.MaximizeBox = False
         Me.Name = "Form1"
         Me.Text = "Form1"
         Me.ResumeLayout(False)
