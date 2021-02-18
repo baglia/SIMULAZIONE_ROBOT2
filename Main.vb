@@ -19,13 +19,17 @@
             pointPartenza.Y = e.Y
             setPartenza = False
             lblP_partenza.Text = "(X,Y) PARTENZA: (" + CStr(e.X) + "," + CStr(e.Y) + ")"
+            btnSetPosPartenza.BackColor = Color.LightGray
+            btnSetPosArrivo.BackColor = Color.LightGray
         End If
 
         If setArrivo Then
             pointArrivo.X = e.X
             pointArrivo.Y = e.Y
             setArrivo = False
-            lblP_arrivo.Text = "(X,Y) PARTENZA: (" + CStr(e.X) + "," + CStr(e.Y) + ")"
+                lblP_arrivo.Text = "(X,Y) PARTENZA: (" + CStr(e.X) + "," + CStr(e.Y) + ")"
+            btnSetPosPartenza.BackColor = Color.LightGray
+            btnSetPosArrivo.BackColor = Color.LightGray
         End If
 
 
@@ -35,12 +39,16 @@
     Private Sub btnSetPosPartenza_Click(sender As Object, e As EventArgs) Handles btnSetPosPartenza.Click
         If setArrivo = False Then 'verifico che non sia già attivo set arrivo
             setPartenza = True
+            btnSetPosPartenza.BackColor = Color.Green
+            btnSetPosArrivo.BackColor = Color.Red
         End If
     End Sub
 
     Private Sub btnSetPosArrivo_Click(sender As Object, e As EventArgs) Handles btnSetPosArrivo.Click
         If setPartenza = False Then 'verifico che non sia già attivo set partenza
             setArrivo = True
+            btnSetPosPartenza.BackColor = Color.Red
+            btnSetPosArrivo.BackColor = Color.Green
         End If
     End Sub
 End Class
