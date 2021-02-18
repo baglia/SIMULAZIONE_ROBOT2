@@ -29,8 +29,11 @@ Partial Class Main
         Me.btnSetPosArrivo = New System.Windows.Forms.Button()
         Me.btnSetPosPartenza = New System.Windows.Forms.Button()
         Me.lblP_arrivo = New System.Windows.Forms.Label()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.grpSimulazione.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'grpSimulazione
@@ -67,14 +70,14 @@ Partial Class Main
         Me.GroupBox1.Controls.Add(Me.lblP_partenza)
         Me.GroupBox1.Location = New System.Drawing.Point(467, 33)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(321, 100)
+        Me.GroupBox1.Size = New System.Drawing.Size(321, 99)
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "GroupBox1"
+        Me.GroupBox1.Text = "Set Coordinate"
         '
         'btnSetPosArrivo
         '
-        Me.btnSetPosArrivo.Location = New System.Drawing.Point(240, 53)
+        Me.btnSetPosArrivo.Location = New System.Drawing.Point(240, 56)
         Me.btnSetPosArrivo.Name = "btnSetPosArrivo"
         Me.btnSetPosArrivo.Size = New System.Drawing.Size(75, 23)
         Me.btnSetPosArrivo.TabIndex = 4
@@ -99,11 +102,31 @@ Partial Class Main
         Me.lblP_arrivo.TabIndex = 2
         Me.lblP_arrivo.Text = "(X,Y) ARRIVO: "
         '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.ComboBox1)
+        Me.GroupBox2.Location = New System.Drawing.Point(467, 139)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(321, 299)
+        Me.GroupBox2.TabIndex = 3
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Modalità"
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {"Lineare", "Circolare"})
+        Me.ComboBox1.Location = New System.Drawing.Point(9, 21)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(121, 24)
+        Me.ComboBox1.TabIndex = 0
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.grpSimulazione)
         Me.MaximizeBox = False
@@ -112,6 +135,7 @@ Partial Class Main
         Me.grpSimulazione.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -123,4 +147,6 @@ Partial Class Main
     Friend WithEvents btnSetPosArrivo As Button
     Friend WithEvents btnSetPosPartenza As Button
     Friend WithEvents lblP_arrivo As Label
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents ComboBox1 As ComboBox
 End Class
