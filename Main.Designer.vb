@@ -26,14 +26,25 @@ Partial Class Main
         Me.panelSimTop = New System.Windows.Forms.Panel()
         Me.lblP_partenza = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.btnSetPosArrivo = New System.Windows.Forms.Button()
         Me.btnSetPosPartenza = New System.Windows.Forms.Button()
         Me.lblP_arrivo = New System.Windows.Forms.Label()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.sliderVelocità = New System.Windows.Forms.TrackBar()
+        Me.comboAccelerazioneLineare = New System.Windows.Forms.ComboBox()
+        Me.lblTipoAccelerazione = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.comboTipoSpostamento = New System.Windows.Forms.ComboBox()
+        Me.txtRaggio = New System.Windows.Forms.TextBox()
+        Me.btnVersoRotazione = New System.Windows.Forms.Button()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.btnTerzoPunto = New System.Windows.Forms.Button()
+        Me.lblTerzoPunto = New System.Windows.Forms.Label()
         Me.grpSimulazione.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
+        CType(Me.sliderVelocità, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'grpSimulazione
@@ -41,16 +52,17 @@ Partial Class Main
         Me.grpSimulazione.Controls.Add(Me.panelSimTop)
         Me.grpSimulazione.Location = New System.Drawing.Point(12, 12)
         Me.grpSimulazione.Name = "grpSimulazione"
-        Me.grpSimulazione.Size = New System.Drawing.Size(449, 426)
+        Me.grpSimulazione.Size = New System.Drawing.Size(449, 546)
         Me.grpSimulazione.TabIndex = 0
         Me.grpSimulazione.TabStop = False
         Me.grpSimulazione.Text = "Simulazione"
         '
         'panelSimTop
         '
+        Me.panelSimTop.BackColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.panelSimTop.Location = New System.Drawing.Point(6, 21)
         Me.panelSimTop.Name = "panelSimTop"
-        Me.panelSimTop.Size = New System.Drawing.Size(437, 399)
+        Me.panelSimTop.Size = New System.Drawing.Size(437, 519)
         Me.panelSimTop.TabIndex = 0
         '
         'lblP_partenza
@@ -64,16 +76,26 @@ Partial Class Main
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.btnSetPosArrivo)
         Me.GroupBox1.Controls.Add(Me.btnSetPosPartenza)
         Me.GroupBox1.Controls.Add(Me.lblP_arrivo)
         Me.GroupBox1.Controls.Add(Me.lblP_partenza)
         Me.GroupBox1.Location = New System.Drawing.Point(467, 33)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(321, 99)
+        Me.GroupBox1.Size = New System.Drawing.Size(321, 94)
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Set Coordinate"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(6, 60)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(104, 17)
+        Me.Label5.TabIndex = 5
+        Me.Label5.Text = "(X,Y) ARRIVO: "
         '
         'btnSetPosArrivo
         '
@@ -102,41 +124,139 @@ Partial Class Main
         Me.lblP_arrivo.TabIndex = 2
         Me.lblP_arrivo.Text = "(X,Y) ARRIVO: "
         '
-        'GroupBox2
+        'sliderVelocità
         '
-        Me.GroupBox2.Controls.Add(Me.ComboBox1)
-        Me.GroupBox2.Location = New System.Drawing.Point(467, 139)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(321, 299)
-        Me.GroupBox2.TabIndex = 3
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Modalità"
+        Me.sliderVelocità.BackColor = System.Drawing.SystemColors.Control
+        Me.sliderVelocità.Location = New System.Drawing.Point(578, 207)
+        Me.sliderVelocità.Name = "sliderVelocità"
+        Me.sliderVelocità.Size = New System.Drawing.Size(210, 56)
+        Me.sliderVelocità.TabIndex = 0
         '
-        'ComboBox1
+        'comboAccelerazioneLineare
         '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"Lineare", "Circolare"})
-        Me.ComboBox1.Location = New System.Drawing.Point(9, 21)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(121, 24)
-        Me.ComboBox1.TabIndex = 0
+        Me.comboAccelerazioneLineare.FormattingEnabled = True
+        Me.comboAccelerazioneLineare.Items.AddRange(New Object() {"Tre tratti", "Cicloidale"})
+        Me.comboAccelerazioneLineare.Location = New System.Drawing.Point(578, 153)
+        Me.comboAccelerazioneLineare.Name = "comboAccelerazioneLineare"
+        Me.comboAccelerazioneLineare.Size = New System.Drawing.Size(210, 24)
+        Me.comboAccelerazioneLineare.TabIndex = 1
+        '
+        'lblTipoAccelerazione
+        '
+        Me.lblTipoAccelerazione.AutoSize = True
+        Me.lblTipoAccelerazione.Location = New System.Drawing.Point(467, 153)
+        Me.lblTipoAccelerazione.Name = "lblTipoAccelerazione"
+        Me.lblTipoAccelerazione.Size = New System.Drawing.Size(105, 17)
+        Me.lblTipoAccelerazione.TabIndex = 2
+        Me.lblTipoAccelerazione.Text = "Accelerazione: "
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(467, 220)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(66, 17)
+        Me.Label1.TabIndex = 3
+        Me.Label1.Text = "Velocità: "
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(467, 303)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(95, 17)
+        Me.Label2.TabIndex = 5
+        Me.Label2.Text = "Spostamento:"
+        '
+        'comboTipoSpostamento
+        '
+        Me.comboTipoSpostamento.FormattingEnabled = True
+        Me.comboTipoSpostamento.Items.AddRange(New Object() {"Lineare", "Circolare"})
+        Me.comboTipoSpostamento.Location = New System.Drawing.Point(578, 303)
+        Me.comboTipoSpostamento.Name = "comboTipoSpostamento"
+        Me.comboTipoSpostamento.Size = New System.Drawing.Size(210, 24)
+        Me.comboTipoSpostamento.TabIndex = 4
+        '
+        'txtRaggio
+        '
+        Me.txtRaggio.Location = New System.Drawing.Point(578, 358)
+        Me.txtRaggio.Name = "txtRaggio"
+        Me.txtRaggio.Size = New System.Drawing.Size(210, 22)
+        Me.txtRaggio.TabIndex = 6
+        '
+        'btnVersoRotazione
+        '
+        Me.btnVersoRotazione.Location = New System.Drawing.Point(578, 419)
+        Me.btnVersoRotazione.Name = "btnVersoRotazione"
+        Me.btnVersoRotazione.Size = New System.Drawing.Size(210, 30)
+        Me.btnVersoRotazione.TabIndex = 7
+        Me.btnVersoRotazione.Text = "Button1"
+        Me.btnVersoRotazione.UseVisualStyleBackColor = True
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(467, 361)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(57, 17)
+        Me.Label3.TabIndex = 8
+        Me.Label3.Text = "Raggio:"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(467, 426)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(49, 17)
+        Me.Label4.TabIndex = 9
+        Me.Label4.Text = "Verso:"
+        '
+        'btnTerzoPunto
+        '
+        Me.btnTerzoPunto.Location = New System.Drawing.Point(713, 497)
+        Me.btnTerzoPunto.Name = "btnTerzoPunto"
+        Me.btnTerzoPunto.Size = New System.Drawing.Size(75, 23)
+        Me.btnTerzoPunto.TabIndex = 11
+        Me.btnTerzoPunto.Text = "SET"
+        Me.btnTerzoPunto.UseVisualStyleBackColor = True
+        '
+        'lblTerzoPunto
+        '
+        Me.lblTerzoPunto.AutoSize = True
+        Me.lblTerzoPunto.Location = New System.Drawing.Point(467, 503)
+        Me.lblTerzoPunto.Name = "lblTerzoPunto"
+        Me.lblTerzoPunto.Size = New System.Drawing.Size(190, 17)
+        Me.lblTerzoPunto.TabIndex = 10
+        Me.lblTerzoPunto.Text = "(X,Y) PUNTO INTERMEDIO: "
         '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
-        Me.Controls.Add(Me.GroupBox2)
+        Me.ClientSize = New System.Drawing.Size(800, 578)
+        Me.Controls.Add(Me.btnTerzoPunto)
+        Me.Controls.Add(Me.lblTerzoPunto)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.btnVersoRotazione)
+        Me.Controls.Add(Me.txtRaggio)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.comboTipoSpostamento)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.lblTipoAccelerazione)
+        Me.Controls.Add(Me.comboAccelerazioneLineare)
+        Me.Controls.Add(Me.sliderVelocità)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.grpSimulazione)
         Me.MaximizeBox = False
         Me.Name = "Main"
-        Me.Text = "Form1"
+        Me.Text = "Simulazione"
         Me.grpSimulazione.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
+        CType(Me.sliderVelocità, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -147,6 +267,17 @@ Partial Class Main
     Friend WithEvents btnSetPosArrivo As Button
     Friend WithEvents btnSetPosPartenza As Button
     Friend WithEvents lblP_arrivo As Label
-    Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents sliderVelocità As TrackBar
+    Friend WithEvents comboAccelerazioneLineare As ComboBox
+    Friend WithEvents lblTipoAccelerazione As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents comboTipoSpostamento As ComboBox
+    Friend WithEvents Label5 As Label
+    Friend WithEvents txtRaggio As TextBox
+    Friend WithEvents btnVersoRotazione As Button
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents btnTerzoPunto As Button
+    Friend WithEvents lblTerzoPunto As Label
 End Class
