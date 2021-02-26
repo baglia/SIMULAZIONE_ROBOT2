@@ -1,7 +1,7 @@
 ﻿Public Class QuadraticEquation
-    Dim a As Double
-    Dim b As Double
-    Dim c As Double
+    'Dim a As Double
+    'Dim b As Double
+    'Dim c As Double
     Dim solution As Double
 
     Private Function delta(a As Double, b As Double, c As Double)
