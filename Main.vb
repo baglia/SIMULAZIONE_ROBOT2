@@ -16,7 +16,9 @@
         lblP_partenza.Text = lblP_partenza.Text + " (0;0)"
         lblP_arrivo.Text = lblP_arrivo.Text + " (0;0)"
         lblTerzoPunto.Text = lblP_arrivo.Text + " (0;0)"
-
+        btnTerzoPunto.Enabled = False
+        btnVersoRotazione.Enabled = False
+        txtRaggio.Enabled = False
     End Sub
 
     Private Sub panelSimTop_MouseDown(sender As Object, e As MouseEventArgs) Handles panelSimTop.MouseDown 'funzione viene lanciata 
@@ -97,4 +99,10 @@
 
     End Sub
 
+    Private Sub comboTipoSpostamento_SelectedIndexChanged(sender As Object, e As EventArgs) Handles comboTipoSpostamento.SelectedIndexChanged
+
+        btnTerzoPunto.Enabled = comboTipoSpostamento.SelectedIndex
+        btnVersoRotazione.Enabled = comboTipoSpostamento.SelectedIndex
+        txtRaggio.Enabled = comboTipoSpostamento.SelectedIndex
+    End Sub
 End Class
