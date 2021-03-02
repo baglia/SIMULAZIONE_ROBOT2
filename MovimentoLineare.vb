@@ -1,5 +1,17 @@
 ﻿Public Class MovimentoLineare
-    Dim pointPartenza As New Point
-    Dim pointArrivo As New Point
+    Dim firstPoint As New Point
+    Dim lastPoint As New Point
+    Dim targetLine As New Line
+
+
+    Public Sub New()
+    End Sub
+
+    Public Sub New(_firstPoint As Point, _lastPoint As Point)
+        targetLine.calculateLine(_firstPoint, _lastPoint)
+    End Sub
+
+
+
 
 End Class

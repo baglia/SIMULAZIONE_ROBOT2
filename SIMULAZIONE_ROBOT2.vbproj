@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="Cinematica.vb" />
     <Compile Include="Circle.vb" />
+    <Compile Include="Geometry.vb" />
     <Compile Include="Main.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +102,7 @@
     </Compile>
     <Compile Include="Line.vb" />
     <Compile Include="QuadraticEquation.vb" />
+    <Compile Include="Scheduling.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Main.resx">

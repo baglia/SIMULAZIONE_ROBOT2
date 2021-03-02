@@ -10,6 +10,9 @@
         calculateLine(point, _slope)
     End Sub
 
+    Public Sub New()
+    End Sub
+
     Public Function calculateLine(point1 As Point, point2 As Point)
         If point1.Equals(point2) Then
             Return False
@@ -46,4 +49,17 @@
         Return ortogonalSlope
     End Function
 
+    Public Function isPointOf(_point As Point)
+        If _point.Y = slope * _point.X + offset Then
+            Return True
+        End If
+        Return False
+    End Function
+
+    Public Function getIntercectionPoint(_line As Line)
+        Dim point As Point
+        point.X = (offset - _line.getOffset()) / (_line.getSlope() - slope)
+        point.Y = slope * point.X + offset
+        Return point
+    End Function
 End Class

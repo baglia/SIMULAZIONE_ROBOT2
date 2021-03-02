@@ -22,6 +22,7 @@ Partial Class Main
     'Non modificarla mediante l'editor del codice.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.grpSimulazione = New System.Windows.Forms.GroupBox()
         Me.panelSimTop = New System.Windows.Forms.Panel()
         Me.lblP_partenza = New System.Windows.Forms.Label()
@@ -42,6 +43,8 @@ Partial Class Main
         Me.Label4 = New System.Windows.Forms.Label()
         Me.btnTerzoPunto = New System.Windows.Forms.Button()
         Me.lblTerzoPunto = New System.Windows.Forms.Label()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
         Me.grpSimulazione.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.sliderVelocità, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -229,6 +232,12 @@ Partial Class Main
         Me.lblTerzoPunto.TabIndex = 10
         Me.lblTerzoPunto.Text = "(X,Y) PUNTO INTERMEDIO: "
         '
+        'Timer1
+        '
+        '
+        'Timer2
+        '
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -280,4 +289,6 @@ Partial Class Main
     Friend WithEvents Label4 As Label
     Friend WithEvents btnTerzoPunto As Button
     Friend WithEvents lblTerzoPunto As Label
+    Friend WithEvents Timer1 As Timer
+    Friend WithEvents Timer2 As Timer
 End Class

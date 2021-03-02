@@ -20,24 +20,19 @@
         Return True
     End Function
 
-    Public Function calculateCircle(point1 As Point, point2 As Point, pointCenter As Point)
-        Dim line As New Line(point1, point2)
-        Dim ortogonalLine As New Line(point1, CDbl(line.getOrtogonalSlope()))
-        Dim sign As Int16
-        If point1.Y < point2.Y Then
-            If point1.X < point2.X Then
-                sign = -1
-            Else
-                sign = +1
-            End If
-        Else
-            If point1.X < point2.X Then
-                sign = +1
-            Else
-                sign = -1
-            End If
+    Public Function calculateCircle(_point1 As Point, _point2 As Point, _point3 As Point)
+        Dim calcolator As New Geometry
+        Dim midPoint1 As New Point(calcolator.midPoint(_point1, _point2).x, calcolator.midPoint(_point1, _point2).y)
+        Dim midPoint2 As New Point(calcolator.midPoint(_point2, _point3).x, calcolator.midPoint(_point2, _point3).y)
+        Dim line1 As New Line(_point1, _point2)
+        Dim line2 As New Line(_point2, _point3)
+        If line1.Equals(line2) Then
+            Return False
         End If
-
-
+        Dim lineOrt1 As New Line(midPoint1, CDbl(line1.getOrtogonalSlope()))
+        Dim lineOrt2 As New Line(midPoint2, CDbl(line2.getOrtogonalSlope()))
+        pointCenter = lineOrt1.getIntercectionPoint(lineOrt2)
+        radius = calcolator.pointDistance(pointCenter, _point1)
+        Return True
     End Function
 End Class
