@@ -4,11 +4,19 @@
     'Dim c As Double
     Dim solution As Double
 
-    Private Function delta(a As Double, b As Double, c As Double)
-        Return Math.Pow(b, 2) - 4 * a * c
+    Private Function delta(_a As Double, _b As Double, _c As Double)
+        Return Math.Pow(_b, 2) - 4 * _a * _c
     End Function
 
-    Public Sub solve(a As Double, b As Double, c As Double, sign As Integer)
-        solution = (-b + Math.Sign(sign) * Math.Sqrt(Math.Abs(delta(a, b, c)))) / (2 * a)
+    Public Sub solve(_a As Double, _b As Double, _c As Double, _sign As Integer)
+        solution = (-_b + Math.Sign(_sign) * Math.Sqrt(Math.Abs(delta(_a, _b, _c)))) / (2 * _a)
     End Sub
+
+    Public Function getSolution(_a As Double, _b As Double, _c As Double, _sign As Integer)
+        solve(_a, _b, _c, _sign)
+        Return solution
+    End Function
+    Public Function getSolution()
+        Return solution
+    End Function
 End Class
