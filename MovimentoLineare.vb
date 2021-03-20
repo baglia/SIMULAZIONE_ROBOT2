@@ -2,7 +2,8 @@
     Dim firstPoint As New Point
     Dim lastPoint As New Point
     Dim targetLine As New Line
-
+    Dim angle As Cinematica
+    Dim legge As Cicloidale
 
     Public Sub New()
     End Sub
