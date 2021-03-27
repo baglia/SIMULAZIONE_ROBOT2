@@ -1,8 +1,8 @@
 ﻿Public Class MovimentoCircolare
-    Dim pointPartenza As New Point
-    Dim pointArrivo As New Point
-    Dim pointIntermedio As New Point
-    Dim circle As New Circle()
+    Private pointPartenza As New Point
+    Private pointArrivo As New Point
+    Private pointIntermedio As New Point
+    Private circle As New Circle()
 
     Public Sub New()
 

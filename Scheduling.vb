@@ -1,7 +1,7 @@
 ﻿Public Class Scheduling
-    Dim periods1 As New Queue(Of Integer)
-    Dim periods2 As New Queue(Of Integer)
-    Dim cinematica As New Cinematica
+    Private periods1 As New Queue(Of Integer)
+    Private periods2 As New Queue(Of Integer)
+
 
 
     Public Function getPeriod1()

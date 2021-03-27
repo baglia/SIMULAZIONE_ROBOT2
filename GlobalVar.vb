@@ -1,11 +1,11 @@
 ﻿Module GlobalVar
-    Dim maxAccel As Integer
-    Dim maxSpeed As Integer
-    Dim minSpeed As Integer
-    Dim dAlpha As Double
-    Dim dBeta As Double
-    Dim GlobalVar As Double
-    Dim GlobalVar As Double
+    Private maxAccel As Integer
+    Private maxSpeed As Integer
+    Private minSpeed As Integer
+    Private length1 As Integer
+    Private length2 As Integer
+    Private alpha As New Angles()
+    Private beta As New Angles()
 
     Public Function getMaxAccel()
         Return maxAccel
@@ -20,19 +20,27 @@
     End Function
 
     Public Function getDAlpha()
-        Return dAlpha
+        Return alpha.getDAngle()
     End Function
 
     Public Function getDBeta()
-        Return dBeta
+        Return beta.getDAngle()
     End Function
 
     Public Function getLength1()
-        Return GlobalVar
+        Return length1
     End Function
 
     Public Function getLength2()
-        Return GlobalVar
+        Return length2
+    End Function
+
+    Public Function getAlpha()
+        Return alpha
+    End Function
+
+    Public Function getBeta()
+        Return beta
     End Function
 
     Public Sub setMaxSpeed(_maxSpeed As Integer)
@@ -48,18 +56,28 @@
     End Sub
 
     Public Sub setDAlpha(_steps As Integer)
-        dAlpha = 2 * Math.PI / _steps
+        alpha.setDAngle(2 * Math.PI / _steps)
     End Sub
 
     Public Sub setDBeta(_steps As Integer)
-        dBeta = 2 * Math.PI / _steps
+        beta.setDAngle(2 * Math.PI / _steps)
     End Sub
 
     Public Sub setLength1(_length1 As Integer)
-        GlobalVar = _length1
+        length1 = _length1
     End Sub
 
     Public Sub setLength2(_length2 As Integer)
-        GlobalVar = _length2
+        length2 = _length2
+    End Sub
+
+    Public Sub setAlpha(_alpha As Double, _beta As Double)
+        alpha.setMainAngle(_alpha)
+        alpha.setSecondAngle(_beta)
+    End Sub
+
+    Public Sub setBeta(_beta As Double, _alpha As Double)
+        beta.setMainAngle(_beta)
+        beta.setSecondAngle(_alpha)
     End Sub
 End Module

@@ -1,11 +1,11 @@
 ﻿Public Class Trapezoidal
-    Dim line1 As New Line()
-    Dim line2 As New Line()
-    Dim line3 As New Line()
-    Dim point1 As New Point
-    Dim point2 As New Point
-    Dim isError As Boolean
-    Dim distance As Double
+    Private line1 As New Line()
+    Private line2 As New Line()
+    Private line3 As New Line()
+    Private point1 As New Point
+    Private point2 As New Point
+    Private isError As Boolean
+    Private distance As Double
 
     Public Sub New()
 
@@ -59,4 +59,39 @@
     Public Function getError()
         Return isError
     End Function
+
+    Public Function getLine1()
+        Return line1
+    End Function
+
+    Public Function getLine2()
+        Return line2
+    End Function
+
+    Public Function getLine3()
+        Return line3
+    End Function
+
+    Public Function getPoint1()
+        Return point1
+    End Function
+
+    Public Function getPoint2()
+        Return point2
+    End Function
+
+    Public Function getDistance()
+        Return distance
+    End Function
+
+    Public Sub copy(_legge As Trapezoidal)
+        line1.copy(_legge.getLine1())
+        line2.copy(_legge.getLine2())
+        line3.copy(_legge.getLine3())
+        point1.X = _legge.getPoint1().x
+        point1.Y = _legge.getPoint1().y
+        point2.X = _legge.getPoint2().x
+        point2.Y = _legge.getPoint2().y
+        distance = _legge.getDistance()
+    End Sub
 End Class

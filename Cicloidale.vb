@@ -1,8 +1,8 @@
 ﻿Public Class Cicloidale
-    Dim a As Double
-    Dim b As Double
-    Dim distance As Double
-    Dim isError As Boolean
+    Private a As Double
+    Private b As Double
+    Private distance As Double
+    Private isError As Boolean
 
     Public Sub New()
 
@@ -12,6 +12,7 @@
         If _maxSpeed < GlobalVar.getMaxSpeed() Then
             a = (_maxSpeed - GlobalVar.getMinSpeed()) / 2
             b = 2 * Math.PI / _distance
+            distance = _distance
             isError = False
         Else
             isError = True
@@ -31,4 +32,21 @@
     Public Function getError()
         Return isError
     End Function
+
+    Public Function getA()
+        Return a
+    End Function
+
+    Public Function getB()
+        Return b
+    End Function
+
+    Public Function getDistance()
+        Return distance
+    End Function
+    Public Sub copy(_legge As Cicloidale)
+        a = _legge.getA()
+        b = _legge.getB()
+        distance = _legge.getDistance()
+    End Sub
 End Class

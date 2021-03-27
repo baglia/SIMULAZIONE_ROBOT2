@@ -1,6 +1,6 @@
 ﻿Public Class Line
-    Dim slope As Double
-    Dim offset As Double
+    Private slope As Double
+    Private offset As Double
 
     Public Sub New(point1 As Point, point2 As Point)
         calculateLine(point1, point2)
@@ -22,10 +22,10 @@
         Return True
     End Function
 
-    Public Function calculateLine(point As Point, _slope As Double)
+    Public Sub calculateLine(point As Point, _slope As Double)
         slope = _slope
         offset = point.Y - point.X * slope
-    End Function
+    End Sub
 
     Public Function X(Y As Double)
         Return (Y - offset) / slope
@@ -62,4 +62,9 @@
         point.Y = slope * point.X + offset
         Return point
     End Function
+
+    Public Sub copy(_line As Line)
+        slope = _line.getSlope()
+        offset = _line.getOffset()
+    End Sub
 End Class

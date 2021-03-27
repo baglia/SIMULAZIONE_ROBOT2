@@ -73,6 +73,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Angles.vb" />
     <Compile Include="Cicloidale.vb" />
     <Compile Include="Cinematica.vb" />
     <Compile Include="Circle.vb" />
@@ -106,6 +107,7 @@
     <Compile Include="QuadraticEquation.vb" />
     <Compile Include="Scheduling.vb" />
     <Compile Include="Trapezoidal.vb" />
+    <Compile Include="Velocity.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Main.resx">
