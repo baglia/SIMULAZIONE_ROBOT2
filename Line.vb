@@ -27,6 +27,10 @@
         offset = point.Y - point.X * slope
     End Sub
 
+    Public Sub setSlope(_slope As Double)
+        slope = _slope
+    End Sub
+
     Public Function X(Y As Double)
         Return (Y - offset) / slope
     End Function

@@ -51,9 +51,11 @@
         alpha.setMainAngle(alpha.getMainAngle + alpha.getDAngle)
         If isTrapezoidal Then
             vel.Modul = trapezoidal.getSpeed(Geometry.pointDistance(point, firstPoint))
+
         Else
             vel.Modul = cicloidale.getSpeed(Geometry.pointDistance(point, firstPoint))
         End If
+        vel.Phase = Math.Atan2(lastPoint.Y - firstPoint.Y, lastPoint.X - firstPoint.X)
 
         Return period
     End Function

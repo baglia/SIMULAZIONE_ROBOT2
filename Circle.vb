@@ -35,4 +35,29 @@
         radius = Geometry.pointDistance(pointCenter, _point1)
         Return True
     End Function
+
+    Public Function tangent(_point As Point)
+        Dim radial As New Line(pointCenter, _point)
+        If Not isOnCircle(_point) Then
+            Dim tg As New Line
+            tg.setSlope(Double.NaN)
+            Return tg
+        End If
+        Return New Line(_point, CDbl(radial.getOrtogonalSlope()))
+    End Function
+
+    Public Function tangent(_angle As Double) 'angolo rispetto alla parallela all'orizzontale
+        Dim point As Point
+        point.X = pointCenter.X + radius * Math.Cos(_angle)
+        point.Y = pointCenter.Y + radius * Math.Sin(_angle)
+        Return tangent(point)
+    End Function
+
+    Public Function isOnCircle(_point As Point)
+        If Geometry.pointDistance(pointCenter, _point) = radius Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
 End Class

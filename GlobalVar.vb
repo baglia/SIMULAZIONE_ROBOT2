@@ -6,7 +6,12 @@
     Private length2 As Integer
     Private alpha As New Angles()
     Private beta As New Angles()
+    Private c As New Circle
 
+
+    Public Function prova()
+        Return c
+    End Function
     Public Function getMaxAccel()
         Return maxAccel
     End Function

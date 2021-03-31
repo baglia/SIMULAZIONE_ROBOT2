@@ -16,11 +16,10 @@
         pointJoint1.X = GlobalVar.getLength1() * Math.Cos(GlobalVar.getAlpha())
         pointJoint1.Y = GlobalVar.getLength1() * Math.Sin(GlobalVar.getAlpha())
         Return pointJoint1
+        GlobalVar.prova.
     End Function
 
-    Public Function calcOmegaA(_point As Point, _vel As Double, _tangente As Line)
 
-    End Function
     Private Function calcModule(_point As Point)
         Return Math.Sqrt(Math.Pow(_point.X, 2) + Math.Pow(_point.Y, 2))
     End Function
@@ -29,7 +28,16 @@
         Return Math.Atan2(_point.Y, _point.X)
     End Function
 
+    Public Function calcJointSpeed(_velocity As Velocity, _point As Point, _isAlpha As Boolean)
+        Dim point12 As New Point
+        Dim pointV2 As New Point(_velocity.Modul * Math.Cos(_velocity.Phase), _velocity.Modul * Math.Sin(_velocity.Phase))
+        If _isAlpha Then
 
+            Dim Q2 As Double = pointV2.Y - pointV2.X * Math.Tan(GlobalVar.getAlpha.getMainAngle())
+        Else
+            Dim Q2 As Double = pointV2.Y - pointV2.X * Math.Tan(GlobalVar.getBeta.getMainAngle())
+        End If
 
+    End Function
 
 End Module
