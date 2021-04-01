@@ -1,6 +1,6 @@
 ﻿Public Class MovimentoLineare
-    Private firstPoint As New Point
-    Private lastPoint As New Point
+    Private firstPoint As New PointC
+    Private lastPoint As New PointC
     Private targetLine As New Line
     Private cicloidale As New Cicloidale()
     Private trapezoidal As New Trapezoidal()
@@ -9,26 +9,26 @@
     Public Sub New()
     End Sub
 
-    Public Function setMovement(_firstPoint As Point, _lastPoint As Point, _legge As Cicloidale)
+    Public Function setMovement(_firstPoint As PointC, _lastPoint As PointC, _legge As Cicloidale)
         If _firstPoint.Equals(_lastPoint) Then
             Return False
         End If
         isTrapezoidal = False
         cicloidale.copy(_legge)
-        firstPoint = _firstPoint
-        lastPoint = _lastPoint
+        firstPoint.copy(_firstPoint)
+        lastPoint.copy(_lastPoint)
         targetLine.calculateLine(_firstPoint, _lastPoint)
         Return True
     End Function
 
-    Public Function setMovement(_firstPoint As Point, _lastPoint As Point, _legge As Trapezoidal)
+    Public Function setMovement(_firstPoint As PointC, _lastPoint As PointC, _legge As Trapezoidal)
         If _firstPoint.Equals(_lastPoint) Then
             Return False
         End If
         isTrapezoidal = True
         trapezoidal.copy(_legge)
-        firstPoint = _firstPoint
-        lastPoint = _lastPoint
+        firstPoint.copy(_firstPoint)
+        lastPoint.copy(_lastPoint)
         targetLine.calculateLine(_firstPoint, _lastPoint)
         Return True
     End Function
@@ -38,11 +38,10 @@
     End Function
 
     Public Function getNextPeriodA(_isNew As Boolean)
-        Static point As Point
+        Static point As PointC
         Dim vel As New Velocity
         If _isNew Then
-            point.X = firstPoint.X
-            point.Y = firstPoint.Y
+            point.copy(firstPoint)
         End If
         Dim period As Double
         Dim alpha As New Angles
@@ -55,7 +54,7 @@
         Else
             vel.Modul = cicloidale.getSpeed(Geometry.pointDistance(point, firstPoint))
         End If
-        vel.Phase = Math.Atan2(lastPoint.Y - firstPoint.Y, lastPoint.X - firstPoint.X)
+        vel.Phase = Math.Atan2(lastPoint.getY - firstPoint.getY, lastPoint.getX - firstPoint.getX)
         Dim omega As Double = Cinematica.calcJointSpeed(vel, point, True)
         If omega > 0 Then
             Cinematica.calcBeta(GlobalVar.getAlpha.getMainAngle + GlobalVar.getAlpha.getDAngle, targetLine, point, lastPoint, True)

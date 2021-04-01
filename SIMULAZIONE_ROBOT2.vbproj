@@ -104,6 +104,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Line.vb" />
+    <Compile Include="PointC.vb" />
     <Compile Include="QuadraticEquation.vb" />
     <Compile Include="Scheduling.vb" />
     <Compile Include="Trapezoidal.vb" />

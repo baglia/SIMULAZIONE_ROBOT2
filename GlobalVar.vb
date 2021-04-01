@@ -10,23 +10,23 @@
 
 
 
-    Public Function getMaxAccel()
+    Public Function getMaxAccel() As Integer
         Return maxAccel
     End Function
 
-    Public Function getMaxSpeed()
+    Public Function getMaxSpeed() As Integer
         Return maxSpeed
     End Function
 
-    Public Function getMinSpeed()
+    Public Function getMinSpeed() As Integer
         Return minSpeed
     End Function
 
-    Public Function getLength1()
+    Public Function getLength1() As Integer
         Return length1
     End Function
 
-    Public Function getLength2()
+    Public Function getLength2() As Integer
         Return length2
     End Function
 

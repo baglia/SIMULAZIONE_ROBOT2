@@ -2,8 +2,8 @@
     Private line1 As New Line()
     Private line2 As New Line()
     Private line3 As New Line()
-    Private point1 As New Point
-    Private point2 As New Point
+    Private point1 As New PointC
+    Private point2 As New PointC
     Private isError As Boolean
     Private distance As Double
 
@@ -56,31 +56,31 @@
         End If
     End Function
 
-    Public Function getError()
+    Public Function getError() As Boolean
         Return isError
     End Function
 
-    Public Function getLine1()
+    Public Function getLine1() As Line
         Return line1
     End Function
 
-    Public Function getLine2()
+    Public Function getLine2() As Line
         Return line2
     End Function
 
-    Public Function getLine3()
+    Public Function getLine3() As Line
         Return line3
     End Function
 
-    Public Function getPoint1()
+    Public Function getPoint1() As PointC
         Return point1
     End Function
 
-    Public Function getPoint2()
+    Public Function getPoint2() As PointC
         Return point2
     End Function
 
-    Public Function getDistance()
+    Public Function getDistance() As Double
         Return distance
     End Function
 
@@ -88,10 +88,8 @@
         line1.copy(_legge.getLine1())
         line2.copy(_legge.getLine2())
         line3.copy(_legge.getLine3())
-        point1.X = _legge.getPoint1().x
-        point1.Y = _legge.getPoint1().y
-        point2.X = _legge.getPoint2().x
-        point2.Y = _legge.getPoint2().y
+        point1.copy(_legge.getPoint1())
+        point2.copy(_legge.getPoint2())
         distance = _legge.getDistance()
     End Sub
 End Class

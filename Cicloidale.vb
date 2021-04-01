@@ -19,7 +19,7 @@
         End If
     End Sub
 
-    Public Function getSpeed(_distance As Double)
+    Public Function getSpeed(_distance As Double) As Double
         If _distance < distance Then
             isError = False
             Return a * (Math.Cos(b * _distance + Math.PI) + 1) + GlobalVar.getMinSpeed()
@@ -29,21 +29,22 @@
         End If
     End Function
 
-    Public Function getError()
+    Public Function getError() As Double
         Return isError
     End Function
 
-    Public Function getA()
+    Public Function getA() As Double
         Return a
     End Function
 
-    Public Function getB()
+    Public Function getB() As Double
         Return b
     End Function
 
-    Public Function getDistance()
+    Public Function getDistance() As Double
         Return distance
     End Function
+
     Public Sub copy(_legge As Cicloidale)
         a = _legge.getA()
         b = _legge.getB()
