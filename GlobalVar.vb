@@ -1,17 +1,15 @@
 ﻿Module GlobalVar
-    Private maxAccel As Integer
-    Private maxSpeed As Integer
-    Private minSpeed As Integer
-    Private length1 As Integer
-    Private length2 As Integer
-    Private alpha As New Angles()
-    Private beta As New Angles()
-    Private c As New Circle
+    Friend maxAccel As Integer
+    Friend maxSpeed As Integer
+    Friend minSpeed As Integer
+    Friend length1 As Integer
+    Friend length2 As Integer
+    Friend alpha As New Angles()
+    Friend beta As New Angles()
 
 
-    Public Function prova()
-        Return c
-    End Function
+
+
     Public Function getMaxAccel()
         Return maxAccel
     End Function
@@ -24,14 +22,6 @@
         Return minSpeed
     End Function
 
-    Public Function getDAlpha()
-        Return alpha.getDAngle()
-    End Function
-
-    Public Function getDBeta()
-        Return beta.getDAngle()
-    End Function
-
     Public Function getLength1()
         Return length1
     End Function
@@ -40,11 +30,11 @@
         Return length2
     End Function
 
-    Public Function getAlpha()
+    Public Function getAlpha() As Angles
         Return alpha
     End Function
 
-    Public Function getBeta()
+    Public Function getBeta() As Angles
         Return beta
     End Function
 

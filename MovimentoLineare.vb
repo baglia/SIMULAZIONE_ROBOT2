@@ -37,7 +37,7 @@
         Return Geometry.pointDistance(firstPoint, lastPoint)
     End Function
 
-    Public Function getNextPeriodA(_isNew As Double)
+    Public Function getNextPeriodA(_isNew As Boolean)
         Static point As Point
         Dim vel As New Velocity
         If _isNew Then
@@ -56,7 +56,13 @@
             vel.Modul = cicloidale.getSpeed(Geometry.pointDistance(point, firstPoint))
         End If
         vel.Phase = Math.Atan2(lastPoint.Y - firstPoint.Y, lastPoint.X - firstPoint.X)
-
+        Dim omega As Double = Cinematica.calcJointSpeed(vel, point, True)
+        If omega > 0 Then
+            Cinematica.calcBeta(GlobalVar.getAlpha.getMainAngle + GlobalVar.getAlpha.getDAngle, targetLine, point, lastPoint, True)
+        Else
+            Cinematica.calcBeta(GlobalVar.getAlpha.getMainAngle - GlobalVar.getAlpha.getDAngle, targetLine, point, lastPoint, True)
+        End If
+        '!!!!! da finire !!!!!!!
         Return period
     End Function
 
