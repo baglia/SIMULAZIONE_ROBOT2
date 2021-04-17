@@ -9,6 +9,22 @@
     Public Sub New()
     End Sub
 
+    Public Sub New(_firstPoint As PointC, _lastpoint As PointC, _cycloidal As Cicloidale)
+        firstPoint.copy(_firstPoint)
+        lastPoint.copy(_lastpoint)
+        targetLine.calculateLine(firstPoint, lastPoint)
+        cicloidale.copy(_cycloidal)
+        isTrapezoidal = False
+    End Sub
+
+    Public Sub New(_firstPoint As PointC, _lastpoint As PointC, _trapezoidal As Trapezoidal)
+        firstPoint.copy(_firstPoint)
+        lastPoint.copy(_lastpoint)
+        targetLine.calculateLine(firstPoint, lastPoint)
+        trapezoidal.copy(_trapezoidal)
+        isTrapezoidal = True
+    End Sub
+
     Public Function setMovement(_firstPoint As PointC, _lastPoint As PointC, _legge As Cicloidale)
         If _firstPoint.Equals(_lastPoint) Then
             Return False
@@ -37,7 +53,7 @@
         Return Geometry.pointDistance(firstPoint, lastPoint)
     End Function
 
-    Public Function getNextPeriodA(_isNew As Boolean)
+    Public Function getNextPeriodA(_isNew As Boolean) As Integer
         Static point As PointC
         Dim vel As New Velocity
         If _isNew Then
@@ -63,7 +79,7 @@
         Return GlobalVar.getAlpha.getDAngle / omega
     End Function
 
-    Public Function getNextPeriodB(_isNew As Boolean)
+    Public Function getNextPeriodB(_isNew As Boolean) As Integer
         Static point As PointC
         Dim vel As New Velocity
         If _isNew Then

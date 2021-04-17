@@ -11,6 +11,7 @@
     Friend endPoint As New PointC
     Friend isCycloidal As Boolean
     Friend start As Boolean
+    Friend isLinear As Boolean
 
     Public Function getMaxAccel() As Integer
         Return maxAccel
@@ -121,4 +122,12 @@
     Public Sub setAccel(_accel As Integer)
         accel = Math.Min(_accel, maxAccel)
     End Sub
+
+    Public Sub setIsLinear(_isLinear As Boolean)
+        isLinear = _isLinear
+    End Sub
+
+    Public Function getIsLinear() As Boolean
+        Return isLinear
+    End Function
 End Module
