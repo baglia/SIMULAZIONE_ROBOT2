@@ -77,4 +77,29 @@
         calcAngles(point, _isAlpha)
     End Function
 
+    Public Function calcAlpha(_beta As Angles, _targetLine As Line, _previousPoint As PointC, _lastPoint As PointC, _isAlpha As Boolean) As Double
+        Dim line As New Line(Geometry.pointTransport(_previousPoint, GlobalVar.getLength2, _beta.getMainAngle), _targetLine.getSlope)
+        Dim point1, point2, point As New PointC
+        Dim a, b, c As Double
+        a = 1 + line.getSlope
+        b = 2 * line.getSlope * line.getOffset
+        c = Math.Pow(line.getOffset, 2) - Math.Pow(GlobalVar.getLength1, 2)
+        point1.setX(QuadraticEquation.solve(a, b, c, 1))
+        point1.setY(line.getSlope * point1.getX + line.getOffset)
+        point2.setX(QuadraticEquation.solve(a, b, c, -1))
+        point2.setY(line.getSlope * point2.getX + line.getOffset)
+        If Geometry.pointDistance(_previousPoint, _lastPoint) > Geometry.pointDistance(_lastPoint, point1) Or Geometry.pointDistance(_previousPoint, _lastPoint) > Geometry.pointDistance(_previousPoint, point1) Then
+            point.copy(point2)
+        ElseIf Geometry.pointDistance(_previousPoint, _lastPoint) > Geometry.pointDistance(_lastPoint, point2) Or Geometry.pointDistance(_previousPoint, _lastPoint) > Geometry.pointDistance(_previousPoint, point2) Then
+            point.copy(point1)
+        ElseIf Geometry.pointDistance(_previousPoint, point1) < Geometry.pointDistance(_previousPoint, point2) Then
+            point.copy(point1)
+        Else
+            point.copy(point2)
+        End If
+        calcAngles(point, _isAlpha)
+    End Function
+    Public Function calcPointFromAngles(_alpha As Double, _beta As Double)
+        Return New PointC(GlobalVar.getLength1 * Math.Cos(_alpha) + GlobalVar.getLength2 * Math.Cos(_beta), GlobalVar.getLength1 * Math.Sin(_alpha) + GlobalVar.getLength2 * Math.Sin(_beta))
+    End Function
 End Module

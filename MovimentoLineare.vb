@@ -43,7 +43,6 @@
         If _isNew Then
             point.copy(firstPoint)
         End If
-        Dim period As Double
         Dim alpha As New Angles
         Cinematica.calcAngles(point, True)
         alpha.copy(GlobalVar.getAlpha())
@@ -61,14 +60,35 @@
         Else
             Cinematica.calcBeta(GlobalVar.getAlpha.getMainAngle - GlobalVar.getAlpha.getDAngle, targetLine, point, lastPoint, True)
         End If
-        '!!!!! da finire !!!!!!!
-        Return period
+        point.copy(Cinematica.calcPointFromAngles(GlobalVar.getAlpha.getMainAngle, GlobalVar.getAlpha.getSecondAngle))
+        Return GlobalVar.getAlpha.getDAngle / omega
     End Function
 
-    Public Function getNextPeriodB()
-        Dim period As Double
+    Public Function getNextPeriodB(_isNew As Boolean)
+        Static point As PointC
+        Dim vel As New Velocity
+        If _isNew Then
+            point.copy(firstPoint)
+        End If
+        Dim beta As New Angles
+        Cinematica.calcAngles(point, False)
+        beta.copy(GlobalVar.getBeta())
+        beta.setMainAngle(beta.getMainAngle + beta.getDAngle)
+        If isTrapezoidal Then
+            vel.Modul = trapezoidal.getSpeed(Geometry.pointDistance(point, firstPoint))
 
-        Return period
+        Else
+            vel.Modul = cicloidale.getSpeed(Geometry.pointDistance(point, firstPoint))
+        End If
+        vel.Phase = Math.Atan2(lastPoint.getY - firstPoint.getY, lastPoint.getX - firstPoint.getX)
+        Dim omega As Double = Cinematica.calcJointSpeed(vel, point, False)
+        If omega > 0 Then
+            Cinematica.calcAlpha(GlobalVar.getBeta.getMainAngle + GlobalVar.getBeta.getDAngle, targetLine, point, lastPoint, True)
+        Else
+            Cinematica.calcAlpha(GlobalVar.getBeta.getMainAngle - GlobalVar.getBeta.getDAngle, targetLine, point, lastPoint, True)
+        End If
+        point.copy(Cinematica.calcPointFromAngles(GlobalVar.getBeta.getSecondAngle, GlobalVar.getBeta.getMainAngle))
+        Return GlobalVar.getBeta.getDAngle / omega
     End Function
 
 End Class
