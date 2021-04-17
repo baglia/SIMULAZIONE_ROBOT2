@@ -16,7 +16,6 @@
         pointJoint1.setX(GlobalVar.getLength1() * Math.Cos(_alpha))
         pointJoint1.setY(GlobalVar.getLength1() * Math.Sin(_alpha))
         Return pointJoint1
-
     End Function
 
 
@@ -58,7 +57,7 @@
         Return omega
     End Function
 
-    Public Function calcBeta(_alpha As Angles, _targetLine As Line, _previousPoint As PointC, _lastPoint As PointC, _isAlpha As Boolean) As Double
+    Public Sub calcBeta(_alpha As MotorAngles, _targetLine As Line, _previousPoint As PointC, _lastPoint As PointC, _isAlpha As Boolean) As Double
         Dim joint1 As New PointC(calcJoint1(_alpha.getMainAngle).x, calcJoint1(_alpha.getMainAngle).y)
         Dim point1, point2, point As New PointC
         point1.setX(QuadraticEquation.solve(1 + Math.Pow(_targetLine.getSlope, 2), -2 * joint1.getX + 2 * (_targetLine.getOffset - joint1.getY) * _targetLine.getSlope, Math.Pow(_targetLine.getOffset - joint1.getY, 2) + Math.Pow(joint1.getX, 2) - Math.Pow(GlobalVar.getLength2, 2), 1))
@@ -75,10 +74,11 @@
             point.copy(point2)
         End If
         calcAngles(point, _isAlpha)
-    End Function
+    End Sub
 
-    Public Function calcAlpha(_beta As Angles, _targetLine As Line, _previousPoint As PointC, _lastPoint As PointC, _isAlpha As Boolean) As Double
-        Dim line As New Line(Geometry.pointTransport(_previousPoint, GlobalVar.getLength2, _beta.getMainAngle), _targetLine.getSlope)
+    Public Function calcAlpha(_beta As MotorAngles, _targetLine As Line, _previousPoint As PointC, _lastPoint As PointC, _isAlpha As Boolean) As Double
+        Dim beta As New Angle(_beta.getMainAngle + Math.PI, False)
+        Dim line As New Line(Geometry.pointTransport(_previousPoint, GlobalVar.getLength2, beta.getRad), _targetLine.getSlope)
         Dim point1, point2, point As New PointC
         Dim a, b, c As Double
         a = 1 + line.getSlope
@@ -86,8 +86,10 @@
         c = Math.Pow(line.getOffset, 2) - Math.Pow(GlobalVar.getLength1, 2)
         point1.setX(QuadraticEquation.solve(a, b, c, 1))
         point1.setY(line.getSlope * point1.getX + line.getOffset)
+        point1.copy(Geometry.pointTransport(point1, GlobalVar.getLength2, _beta.getMainAngle))
         point2.setX(QuadraticEquation.solve(a, b, c, -1))
         point2.setY(line.getSlope * point2.getX + line.getOffset)
+        point2.copy(Geometry.pointTransport(point2, GlobalVar.getLength2, _beta.getMainAngle))
         If Geometry.pointDistance(_previousPoint, _lastPoint) > Geometry.pointDistance(_lastPoint, point1) Or Geometry.pointDistance(_previousPoint, _lastPoint) > Geometry.pointDistance(_previousPoint, point1) Then
             point.copy(point2)
         ElseIf Geometry.pointDistance(_previousPoint, _lastPoint) > Geometry.pointDistance(_lastPoint, point2) Or Geometry.pointDistance(_previousPoint, _lastPoint) > Geometry.pointDistance(_previousPoint, point2) Then
@@ -99,6 +101,7 @@
         End If
         calcAngles(point, _isAlpha)
     End Function
+
     Public Function calcPointFromAngles(_alpha As Double, _beta As Double)
         Return New PointC(GlobalVar.getLength1 * Math.Cos(_alpha) + GlobalVar.getLength2 * Math.Cos(_beta), GlobalVar.getLength1 * Math.Sin(_alpha) + GlobalVar.getLength2 * Math.Sin(_beta))
     End Function

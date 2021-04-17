@@ -1,14 +1,16 @@
 ﻿Module GlobalVar
+    Friend accel As Integer
     Friend maxAccel As Integer
     Friend maxSpeed As Integer
     Friend minSpeed As Integer
     Friend length1 As Integer
     Friend length2 As Integer
-    Friend alpha As New Angles()
-    Friend beta As New Angles()
-
-
-
+    Friend alpha As New MotorAngles()
+    Friend beta As New MotorAngles()
+    Friend startPoint As New PointC
+    Friend endPoint As New PointC
+    Friend isCycloidal As Boolean
+    Friend start As Boolean
 
     Public Function getMaxAccel() As Integer
         Return maxAccel
@@ -30,11 +32,11 @@
         Return length2
     End Function
 
-    Public Function getAlpha() As Angles
+    Public Function getAlpha() As MotorAngles
         Return alpha
     End Function
 
-    Public Function getBeta() As Angles
+    Public Function getBeta() As MotorAngles
         Return beta
     End Function
 
@@ -74,5 +76,49 @@
     Public Sub setBeta(_beta As Double, _alpha As Double)
         beta.setMainAngle(_beta)
         beta.setSecondAngle(_alpha)
+    End Sub
+
+    Public Sub setStartPoint(_point As PointC)
+        startPoint.copy(_point)
+    End Sub
+
+    Public Sub setEndPoint(_point As PointC)
+        startPoint.copy(_point)
+    End Sub
+
+    Public Sub setIsCycloidal(_isCicloidal As Boolean)
+        isCycloidal = _isCicloidal
+    End Sub
+
+    Public Function getStartPoint() As PointC
+        Return startPoint
+    End Function
+
+    Public Function getEndPoint() As PointC
+        Return endPoint
+    End Function
+
+    Public Function getIsCycloidal() As Boolean
+        Return isCycloidal
+    End Function
+
+    Public Sub setStart(_start As Boolean)
+        start = _start
+    End Sub
+
+    Public Function getStart() As Boolean
+        Return start
+    End Function
+
+    Public Function getDistance() As Double
+        Return Geometry.pointDistance(getStartPoint, getEndPoint)
+    End Function
+
+    Public Function getAccel() As Integer
+        Return accel
+    End Function
+
+    Public Sub setAccel(_accel As Integer)
+        accel = Math.Min(_accel, maxAccel)
     End Sub
 End Module

@@ -43,10 +43,7 @@
         If _isNew Then
             point.copy(firstPoint)
         End If
-        Dim alpha As New Angles
         Cinematica.calcAngles(point, True)
-        alpha.copy(GlobalVar.getAlpha())
-        alpha.setMainAngle(alpha.getMainAngle + alpha.getDAngle)
         If isTrapezoidal Then
             vel.Modul = trapezoidal.getSpeed(Geometry.pointDistance(point, firstPoint))
 
@@ -56,9 +53,11 @@
         vel.Phase = Math.Atan2(lastPoint.getY - firstPoint.getY, lastPoint.getX - firstPoint.getX)
         Dim omega As Double = Cinematica.calcJointSpeed(vel, point, True)
         If omega > 0 Then
-            Cinematica.calcBeta(GlobalVar.getAlpha.getMainAngle + GlobalVar.getAlpha.getDAngle, targetLine, point, lastPoint, True)
+            Dim angle As New Angle(GlobalVar.getAlpha.getMainAngle + GlobalVar.getAlpha.getDAngle, False)
+            Cinematica.calcBeta(angle.getRad, targetLine, point, lastPoint, True)
         Else
-            Cinematica.calcBeta(GlobalVar.getAlpha.getMainAngle - GlobalVar.getAlpha.getDAngle, targetLine, point, lastPoint, True)
+            Dim angle As New Angle(GlobalVar.getAlpha.getMainAngle - GlobalVar.getAlpha.getDAngle, False)
+            Cinematica.calcBeta(angle.getRad, targetLine, point, lastPoint, True)
         End If
         point.copy(Cinematica.calcPointFromAngles(GlobalVar.getAlpha.getMainAngle, GlobalVar.getAlpha.getSecondAngle))
         Return GlobalVar.getAlpha.getDAngle / omega
@@ -70,22 +69,20 @@
         If _isNew Then
             point.copy(firstPoint)
         End If
-        Dim beta As New Angles
         Cinematica.calcAngles(point, False)
-        beta.copy(GlobalVar.getBeta())
-        beta.setMainAngle(beta.getMainAngle + beta.getDAngle)
         If isTrapezoidal Then
             vel.Modul = trapezoidal.getSpeed(Geometry.pointDistance(point, firstPoint))
-
         Else
             vel.Modul = cicloidale.getSpeed(Geometry.pointDistance(point, firstPoint))
         End If
         vel.Phase = Math.Atan2(lastPoint.getY - firstPoint.getY, lastPoint.getX - firstPoint.getX)
         Dim omega As Double = Cinematica.calcJointSpeed(vel, point, False)
         If omega > 0 Then
-            Cinematica.calcAlpha(GlobalVar.getBeta.getMainAngle + GlobalVar.getBeta.getDAngle, targetLine, point, lastPoint, True)
+            Dim angle As New Angle(GlobalVar.getBeta.getMainAngle + GlobalVar.getBeta.getDAngle, False)
+            Cinematica.calcAlpha(angle.getRad, targetLine, point, lastPoint, False)
         Else
-            Cinematica.calcAlpha(GlobalVar.getBeta.getMainAngle - GlobalVar.getBeta.getDAngle, targetLine, point, lastPoint, True)
+            Dim angle As New Angle(GlobalVar.getBeta.getMainAngle - GlobalVar.getBeta.getDAngle, False)
+            Cinematica.calcAlpha(angle.getRad, targetLine, point, lastPoint, False)
         End If
         point.copy(Cinematica.calcPointFromAngles(GlobalVar.getBeta.getSecondAngle, GlobalVar.getBeta.getMainAngle))
         Return GlobalVar.getBeta.getDAngle / omega

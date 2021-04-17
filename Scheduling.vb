@@ -19,12 +19,17 @@
     End Function
 
     Public Sub startCalcLoop()
-        'setup
-
-        'loop
-
+        If GlobalVar.getStart Then
+            'setup
+            Dim trap As New Trapezoidal(GlobalVar.getMaxSpeed, GlobalVar.getDistance, GlobalVar.getMaxAccel)
+            GlobalVar.setStart(False)
+            'loop
+            calcLoop()
+        End If
     End Sub
     Private Sub calcLoop()
+        While (True)
 
+        End While
     End Sub
 End Class

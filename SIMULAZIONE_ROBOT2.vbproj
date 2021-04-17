@@ -73,7 +73,8 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Angles.vb" />
+    <Compile Include="Angle.vb" />
+    <Compile Include="MotorAngles.vb" />
     <Compile Include="Cicloidale.vb" />
     <Compile Include="Cinematica.vb" />
     <Compile Include="Circle.vb" />
