@@ -18,11 +18,11 @@
         Return New PointC(_point.getX + _length * Math.Cos(_phase), _point.getY + _length * Math.Sin(_phase))
     End Function
 
-    Public Function degToRad(_angle As Double)
+    Public Function degToRad(_angle As Double) As Double
         Return _angle * Math.PI / 180
     End Function
 
-    Public Function radToDeg(_angle As Double)
+    Public Function radToDeg(_angle As Double) As Double
         Return _angle * 180 / Math.PI
     End Function
 End Module

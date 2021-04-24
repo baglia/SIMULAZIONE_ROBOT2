@@ -1,23 +1,23 @@
 ﻿Public Class MotorAngles
-    Private mainAngle As Angle
-    Private secondAngle As Angle
-    Private dAngle As Double
+    Private mainAngle As New Angle
+    Private secondAngle As New Angle
+    Private dAngle As New Angle
 
     Public Sub New()
     End Sub
 
-    Public Sub New(_dAngle As Double)
-        dAngle = _dAngle
+    Public Sub New(_step As Integer)
+        dAngle.setRad(CDbl(Math.PI * 2 / _step))
     End Sub
 
     Public Sub New(_angle As MotorAngles)
         mainAngle.setRad(_angle.getMainAngle())
         secondAngle.setRad(_angle.getSecondAngle())
-        dAngle = _angle.getDAngle()
+        dAngle.setRad(_angle.getDAngle())
     End Sub
 
-    Public Sub setDAngle(_dAngle As Double)
-        dAngle = _dAngle
+    Public Sub setDAngle(_step As Integer)
+        dAngle.setRad(CDbl(Math.PI * 2 / _step))
     End Sub
 
     Public Sub setMainAngle(_angle As Double)
@@ -29,7 +29,7 @@
     End Sub
 
     Public Function getDAngle() As Double
-        Return dAngle
+        Return dAngle.getRad
     End Function
 
     Public Function getMainAngle() As Double
@@ -43,6 +43,6 @@
     Public Sub copy(_angle As MotorAngles)
         mainAngle.setRad(_angle.getMainAngle())
         secondAngle.setRad(_angle.getSecondAngle())
-        dAngle = _angle.getDAngle()
+        dAngle.setRad(_angle.getDAngle())
     End Sub
 End Class

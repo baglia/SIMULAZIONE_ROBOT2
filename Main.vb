@@ -1,32 +1,41 @@
 ﻿Public Class Main
 
-    Dim pointPartenza As New Point
-    Dim pointArrivo As New Point
-    Dim pointTerzoPunto As New Point
+    Dim pointPartenza As New PointC
+    Dim pointArrivo As New PointC
+    Dim pointTerzoPunto As New PointC
     Dim setPartenza As Boolean = False
     Dim setArrivo As Boolean = False
     Dim setTerzoPunto As Boolean = False
+    Dim scheduler As New Scheduling
+    Dim alpha, beta As New Angle()
+    Dim thPeriod1 As New Threading.Thread(AddressOf calcPeriod1)
+    Dim thPeriod2 As New Threading.Thread(AddressOf calcPeriod2)
+    Dim thPopulate As New Threading.Thread(AddressOf populateQueue)
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        pointPartenza.X = 0
-        pointPartenza.Y = 0
-        pointArrivo.X = 0
-        pointArrivo.Y = 0
-        pointTerzoPunto.X = 0
-        pointTerzoPunto.Y = 0
+        pointPartenza.setX(0)
+        pointPartenza.setY(0)
+        pointArrivo.setX(0)
+        pointArrivo.setY(0)
+        pointTerzoPunto.setX(0)
+        pointTerzoPunto.setY(0)
         lblP_partenza.Text = lblP_partenza.Text + " (0;0)"
         lblP_arrivo.Text = lblP_arrivo.Text + " (0;0)"
         lblTerzoPunto.Text = lblP_arrivo.Text + " (0;0)"
         btnTerzoPunto.Enabled = False
         btnVersoRotazione.Enabled = False
         txtRaggio.Enabled = False
+        alpha.setRad(0)
+        beta.setRad(Math.PI / 2)
     End Sub
+
 
     Private Sub panelSimTop_MouseDown(sender As Object, e As MouseEventArgs) Handles panelSimTop.MouseDown 'funzione viene lanciata 
         'quando clicco sul form (evento mouseDown)
 
         If setPartenza Then 'se sto settando la partenza salvo le coordinate del punto in cui ho cliccato in pointPartenza
-            pointPartenza.X = e.X
-            pointPartenza.Y = e.Y
+            pointPartenza.setx(e.X)
+            pointPartenza.sety(e.Y)
             setPartenza = False
             lblP_partenza.Text = "(X,Y) PARTENZA: (" + CStr(e.X) + "," + CStr(e.Y) + ")"
             btnSetPosPartenza.BackColor = Color.LightGray
@@ -35,8 +44,8 @@
         End If
 
         If setArrivo Then
-            pointArrivo.X = e.X
-            pointArrivo.Y = e.Y
+            pointArrivo.setx(e.X)
+            pointArrivo.sety(e.Y)
             setArrivo = False
             lblP_arrivo.Text = "(X,Y) ARRIVO: (" + CStr(e.X) + "," + CStr(e.Y) + ")"
             btnSetPosPartenza.BackColor = Color.LightGray
@@ -45,8 +54,8 @@
         End If
 
         If setTerzoPunto Then
-            pointTerzoPunto.X = e.X
-            pointTerzoPunto.Y = e.Y
+            pointTerzoPunto.setx(e.X)
+            pointTerzoPunto.sety(e.Y)
             setTerzoPunto = False
             lblTerzoPunto.Text = "(X,Y) PUNTO INTERMEDIO: (" + CStr(e.X) + "," + CStr(e.Y) + ")"
             btnSetPosPartenza.BackColor = Color.LightGray
@@ -95,7 +104,7 @@
         Dim pleft As New Point
         Dim pTop As New Point
         gTop.Clear(Color.Black)
-        gTop.DrawLine(azzurro, pointPartenza, pointArrivo)
+        gTop.DrawLine(azzurro, pointPartenza.getPointF, pointArrivo.getPointF)
 
     End Sub
 
@@ -106,11 +115,73 @@
         txtRaggio.Enabled = comboTipoSpostamento.SelectedIndex
     End Sub
 
-    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+    Private Sub calcPeriod1()
+        Dim period As New Period(scheduler.getPeriod1())
+        If Not period.getIsPeriod Then
+            Threading.Thread.Sleep(0)
+            Return
+        ElseIf period.getIsEnd Then
+            thPeriod1.Abort()
+        ElseIf period.getIsPeriod > 0 Then
+            Threading.Thread.Sleep(period.getIsPeriod)
+            alpha.setRad(alpha.getRad + GlobalVar.getAlpha.getDAngle)
+        ElseIf period.getIsPeriod = 0 Then
+            Threading.Thread.Sleep(period.getIsPeriod)
+        Else
+            Threading.Thread.Sleep(Math.Abs(period.getIsPeriod))
+            alpha.setRad(alpha.getRad - GlobalVar.getAlpha.getDAngle)
+        End If
+    End Sub
+
+    Private Sub calcPeriod2()
+        Dim period As New Period(scheduler.getPeriod2())
+        If Not period.getIsPeriod Then
+            Threading.Thread.Sleep(0)
+            Return
+        ElseIf period.getIsEnd Then
+            thPeriod2.Abort()
+        ElseIf period.getIsPeriod > 0 Then
+            Threading.Thread.Sleep(period.getIsPeriod)
+            alpha.setRad(beta.getRad + GlobalVar.getBeta.getDAngle)
+        ElseIf period.getIsPeriod = 0 Then
+            Threading.Thread.Sleep(period.getIsPeriod)
+        Else
+            Threading.Thread.Sleep(Math.Abs(period.getIsPeriod))
+            alpha.setRad(beta.getRad - GlobalVar.getBeta.getDAngle)
+        End If
 
     End Sub
 
-    Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
-
+    Private Sub populateQueue()
+        scheduler.startCalcLoop()
+        thPopulate.Abort()
     End Sub
+
+    Private Sub btnImposta_Click(sender As Object, e As EventArgs) Handles btnImposta.Click
+        GlobalVar.setLength1(numLength1.Value)
+        GlobalVar.setLength2(numLength2.Value)
+        GlobalVar.setDAlpha(numStep1.Value)
+        GlobalVar.setDBeta(numStep2.Value)
+        GlobalVar.setMaxAccel(numAmax.Value)
+        GlobalVar.setMaxSpeed(numVmax.Value)
+        GlobalVar.setMinSpeed(numVmin.Value)
+        GlobalVar.setTolerance(numTolleranza.Value)
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        GlobalVar.setIsCycloidal(True)
+        GlobalVar.setIsLinear(True)
+        GlobalVar.setStart(True)
+        GlobalVar.setStartPoint(pointPartenza)
+        GlobalVar.setEndPoint(pointArrivo)
+        startCompute()
+    End Sub
+
+    Private Sub startCompute()
+        thPeriod1.Start()
+        thPeriod2.Start()
+        thPopulate.Start()
+    End Sub
+
+
 End Class

@@ -53,7 +53,7 @@
         Return Geometry.pointDistance(firstPoint, lastPoint)
     End Function
 
-    Public Function getNextPeriodA(_isNew As Boolean) As Integer
+    Public Function getNextPeriodA(_isNew As Boolean) As Period
         Static point As PointC
         Dim vel As New Velocity
         If _isNew Then
@@ -76,10 +76,13 @@
             Cinematica.calcBeta(angle.getRad, targetLine, point, lastPoint, True)
         End If
         point.copy(Cinematica.calcPointFromAngles(GlobalVar.getAlpha.getMainAngle, GlobalVar.getAlpha.getSecondAngle))
-        Return GlobalVar.getAlpha.getDAngle / omega
+        If Geometry.pointDistance(point, lastPoint) < GlobalVar.getTolerance Then
+            Return New Period(True)
+        End If
+        Return New Period(CInt((GlobalVar.getAlpha.getDAngle / omega) * 1000))
     End Function
 
-    Public Function getNextPeriodB(_isNew As Boolean) As Integer
+    Public Function getNextPeriodB(_isNew As Boolean) As Period
         Static point As PointC
         Dim vel As New Velocity
         If _isNew Then
@@ -101,7 +104,10 @@
             Cinematica.calcAlpha(angle.getRad, targetLine, point, lastPoint, False)
         End If
         point.copy(Cinematica.calcPointFromAngles(GlobalVar.getBeta.getSecondAngle, GlobalVar.getBeta.getMainAngle))
-        Return GlobalVar.getBeta.getDAngle / omega
+        If Geometry.pointDistance(point, lastPoint) < GlobalVar.getTolerance Then
+            Return New Period(True)
+        End If
+        Return New Period(CInt((GlobalVar.getAlpha.getDAngle / omega) * 1000))
     End Function
 
 End Class

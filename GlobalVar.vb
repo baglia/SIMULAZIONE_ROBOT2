@@ -12,6 +12,7 @@
     Friend isCycloidal As Boolean
     Friend start As Boolean
     Friend isLinear As Boolean
+    Friend tolerance As Double
 
     Public Function getMaxAccel() As Integer
         Return maxAccel
@@ -107,6 +108,10 @@
         start = _start
     End Sub
 
+    Public Sub setTolerance(_tolerance As Double)
+        tolerance = _tolerance
+    End Sub
+
     Public Function getStart() As Boolean
         Return start
     End Function
@@ -129,5 +134,9 @@
 
     Public Function getIsLinear() As Boolean
         Return isLinear
+    End Function
+
+    Public Function getTolerance() As Double
+        Return tolerance
     End Function
 End Module

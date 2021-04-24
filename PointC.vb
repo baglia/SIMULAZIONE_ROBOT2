@@ -36,4 +36,8 @@
     Public Sub setY(_y As Double)
         point.Y = _y
     End Sub
+
+    Public Function getPointF() As PointF
+        Return point
+    End Function
 End Class
