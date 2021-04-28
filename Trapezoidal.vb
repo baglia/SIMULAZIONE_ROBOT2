@@ -44,7 +44,7 @@
         If _distance <= distance Then
             If _distance < point1.getX Then
                 Return line1.Y(_distance)
-            ElseIf _distance > point1.getX And _distance < point2.getX Then
+            ElseIf _distance < point2.getX Then
                 Return line2.Y(_distance)
             Else
                 Return line3.Y(_distance)
