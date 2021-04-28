@@ -46,7 +46,18 @@ Partial Class Main
         Me.TimerSim = New System.Windows.Forms.Timer(Me.components)
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.TrackBar1 = New System.Windows.Forms.TrackBar()
+        Me.Label14 = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.numTolleranza = New System.Windows.Forms.NumericUpDown()
+        Me.numAmax = New System.Windows.Forms.NumericUpDown()
+        Me.numVmax = New System.Windows.Forms.NumericUpDown()
+        Me.numVmin = New System.Windows.Forms.NumericUpDown()
+        Me.numStep2 = New System.Windows.Forms.NumericUpDown()
+        Me.numStep1 = New System.Windows.Forms.NumericUpDown()
+        Me.numLength2 = New System.Windows.Forms.NumericUpDown()
+        Me.numLength1 = New System.Windows.Forms.NumericUpDown()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
@@ -56,32 +67,21 @@ Partial Class Main
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.btnImposta = New System.Windows.Forms.Button()
-        Me.TrackBar1 = New System.Windows.Forms.TrackBar()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.numLength1 = New System.Windows.Forms.NumericUpDown()
-        Me.numLength2 = New System.Windows.Forms.NumericUpDown()
-        Me.numStep1 = New System.Windows.Forms.NumericUpDown()
-        Me.numStep2 = New System.Windows.Forms.NumericUpDown()
-        Me.numVmin = New System.Windows.Forms.NumericUpDown()
-        Me.numVmax = New System.Windows.Forms.NumericUpDown()
-        Me.numAmax = New System.Windows.Forms.NumericUpDown()
-        Me.numTolleranza = New System.Windows.Forms.NumericUpDown()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.grpSimulazione.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.sliderVelocità, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
-        Me.TabPage2.SuspendLayout()
         CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.numLength1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.numLength2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.numStep1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.numStep2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.numVmin, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.numVmax, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.numAmax, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage2.SuspendLayout()
         CType(Me.numTolleranza, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.numAmax, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.numVmax, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.numVmin, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.numStep2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.numStep1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.numLength2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.numLength1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'grpSimulazione
@@ -306,6 +306,32 @@ Partial Class Main
         Me.TabPage1.Text = "Controllo"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(252, 492)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 14
+        Me.Button1.Text = "Imposta"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'TrackBar1
+        '
+        Me.TrackBar1.BackColor = System.Drawing.SystemColors.Control
+        Me.TrackBar1.Location = New System.Drawing.Point(117, 240)
+        Me.TrackBar1.Name = "TrackBar1"
+        Me.TrackBar1.Size = New System.Drawing.Size(210, 56)
+        Me.TrackBar1.TabIndex = 12
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(3, 240)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(66, 17)
+        Me.Label14.TabIndex = 13
+        Me.Label14.Text = "Velocità: "
+        '
         'TabPage2
         '
         Me.TabPage2.Controls.Add(Me.numTolleranza)
@@ -332,6 +358,69 @@ Partial Class Main
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Parametri"
         Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'numTolleranza
+        '
+        Me.numTolleranza.Location = New System.Drawing.Point(246, 310)
+        Me.numTolleranza.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.numTolleranza.Name = "numTolleranza"
+        Me.numTolleranza.Size = New System.Drawing.Size(72, 22)
+        Me.numTolleranza.TabIndex = 23
+        '
+        'numAmax
+        '
+        Me.numAmax.Location = New System.Drawing.Point(246, 270)
+        Me.numAmax.Name = "numAmax"
+        Me.numAmax.Size = New System.Drawing.Size(72, 22)
+        Me.numAmax.TabIndex = 22
+        '
+        'numVmax
+        '
+        Me.numVmax.Location = New System.Drawing.Point(246, 230)
+        Me.numVmax.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.numVmax.Name = "numVmax"
+        Me.numVmax.Size = New System.Drawing.Size(72, 22)
+        Me.numVmax.TabIndex = 21
+        '
+        'numVmin
+        '
+        Me.numVmin.Location = New System.Drawing.Point(246, 190)
+        Me.numVmin.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.numVmin.Name = "numVmin"
+        Me.numVmin.Size = New System.Drawing.Size(72, 22)
+        Me.numVmin.TabIndex = 20
+        '
+        'numStep2
+        '
+        Me.numStep2.Location = New System.Drawing.Point(246, 150)
+        Me.numStep2.Maximum = New Decimal(New Integer() {250000, 0, 0, 0})
+        Me.numStep2.Name = "numStep2"
+        Me.numStep2.Size = New System.Drawing.Size(72, 22)
+        Me.numStep2.TabIndex = 19
+        '
+        'numStep1
+        '
+        Me.numStep1.Location = New System.Drawing.Point(246, 110)
+        Me.numStep1.Maximum = New Decimal(New Integer() {100000, 0, 0, 0})
+        Me.numStep1.Name = "numStep1"
+        Me.numStep1.Size = New System.Drawing.Size(72, 22)
+        Me.numStep1.TabIndex = 18
+        '
+        'numLength2
+        '
+        Me.numLength2.Location = New System.Drawing.Point(246, 70)
+        Me.numLength2.Maximum = New Decimal(New Integer() {300, 0, 0, 0})
+        Me.numLength2.Name = "numLength2"
+        Me.numLength2.Size = New System.Drawing.Size(72, 22)
+        Me.numLength2.TabIndex = 17
+        '
+        'numLength1
+        '
+        Me.numLength1.Location = New System.Drawing.Point(246, 30)
+        Me.numLength1.Maximum = New Decimal(New Integer() {400, 0, 0, 0})
+        Me.numLength1.Name = "numLength1"
+        Me.numLength1.Size = New System.Drawing.Size(72, 22)
+        Me.numLength1.TabIndex = 16
         '
         'Label13
         '
@@ -415,88 +504,6 @@ Partial Class Main
         Me.btnImposta.Text = "IMPOSTA"
         Me.btnImposta.UseVisualStyleBackColor = True
         '
-        'TrackBar1
-        '
-        Me.TrackBar1.BackColor = System.Drawing.SystemColors.Control
-        Me.TrackBar1.Location = New System.Drawing.Point(117, 240)
-        Me.TrackBar1.Name = "TrackBar1"
-        Me.TrackBar1.Size = New System.Drawing.Size(210, 56)
-        Me.TrackBar1.TabIndex = 12
-        '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(3, 240)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(66, 17)
-        Me.Label14.TabIndex = 13
-        Me.Label14.Text = "Velocità: "
-        '
-        'numLength1
-        '
-        Me.numLength1.Location = New System.Drawing.Point(246, 30)
-        Me.numLength1.Name = "numLength1"
-        Me.numLength1.Size = New System.Drawing.Size(72, 22)
-        Me.numLength1.TabIndex = 16
-        '
-        'numLength2
-        '
-        Me.numLength2.Location = New System.Drawing.Point(246, 70)
-        Me.numLength2.Name = "numLength2"
-        Me.numLength2.Size = New System.Drawing.Size(72, 22)
-        Me.numLength2.TabIndex = 17
-        '
-        'numStep1
-        '
-        Me.numStep1.Location = New System.Drawing.Point(246, 110)
-        Me.numStep1.Name = "numStep1"
-        Me.numStep1.Size = New System.Drawing.Size(72, 22)
-        Me.numStep1.TabIndex = 18
-        '
-        'numStep2
-        '
-        Me.numStep2.Location = New System.Drawing.Point(246, 150)
-        Me.numStep2.Name = "numStep2"
-        Me.numStep2.Size = New System.Drawing.Size(72, 22)
-        Me.numStep2.TabIndex = 19
-        '
-        'numVmin
-        '
-        Me.numVmin.Location = New System.Drawing.Point(246, 190)
-        Me.numVmin.Name = "numVmin"
-        Me.numVmin.Size = New System.Drawing.Size(72, 22)
-        Me.numVmin.TabIndex = 20
-        '
-        'numVmax
-        '
-        Me.numVmax.Location = New System.Drawing.Point(246, 230)
-        Me.numVmax.Name = "numVmax"
-        Me.numVmax.Size = New System.Drawing.Size(72, 22)
-        Me.numVmax.TabIndex = 21
-        '
-        'numAmax
-        '
-        Me.numAmax.Location = New System.Drawing.Point(246, 270)
-        Me.numAmax.Name = "numAmax"
-        Me.numAmax.Size = New System.Drawing.Size(72, 22)
-        Me.numAmax.TabIndex = 22
-        '
-        'numTolleranza
-        '
-        Me.numTolleranza.Location = New System.Drawing.Point(246, 310)
-        Me.numTolleranza.Name = "numTolleranza"
-        Me.numTolleranza.Size = New System.Drawing.Size(72, 22)
-        Me.numTolleranza.TabIndex = 23
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(252, 492)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 14
-        Me.Button1.Text = "Imposta"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -514,17 +521,17 @@ Partial Class Main
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
+        CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage2.PerformLayout()
-        CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.numLength1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.numLength2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.numStep1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.numStep2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.numVmin, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.numVmax, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.numAmax, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.numTolleranza, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.numAmax, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.numVmax, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.numVmin, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.numStep2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.numStep1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.numLength2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.numLength1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

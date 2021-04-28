@@ -55,11 +55,11 @@
     End Sub
 
     Public Sub setDAlpha(_steps As Integer)
-        alpha.setDAngle(2 * Math.PI / _steps)
+        alpha.setDAngle(_steps)
     End Sub
 
     Public Sub setDBeta(_steps As Integer)
-        beta.setDAngle(2 * Math.PI / _steps)
+        beta.setDAngle(_steps)
     End Sub
 
     Public Sub setLength1(_length1 As Integer)
@@ -85,7 +85,7 @@
     End Sub
 
     Public Sub setEndPoint(_point As PointC)
-        startPoint.copy(_point)
+        endPoint.copy(_point)
     End Sub
 
     Public Sub setIsCycloidal(_isCicloidal As Boolean)

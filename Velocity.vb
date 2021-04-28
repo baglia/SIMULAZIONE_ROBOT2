@@ -4,6 +4,9 @@
     Private module1 As Double
     Private phase1 As Double
 
+    Public Sub New()
+
+    End Sub
     Public Property X As Double
         Get
             Return x1

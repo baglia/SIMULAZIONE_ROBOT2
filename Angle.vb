@@ -40,4 +40,11 @@
     Public Function getDeg()
         Return Geometry.radToDeg(angle)
     End Function
+
+    Public Function isEqual(_angle As Angle) As Boolean
+        If Math.Round(getRad, 6) = Math.Round(_angle.getRad, 6) Then
+            Return True
+        End If
+        Return False
+    End Function
 End Class

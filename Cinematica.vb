@@ -2,8 +2,8 @@
     Public Sub calcAngles(_point As PointC, _isAlpha As Boolean)
         Dim alpha As Double
         Dim beta As Double
-        alpha = calcPhase(_point) + Math.Acos((Math.Pow(GlobalVar.getLength1(), 2) + Math.Pow(calcModule(_point), 2) - Math.Pow(GlobalVar.getLength2(), 2)) / (2 * GlobalVar.getLength2() * calcModule(_point)))
-        beta = Math.PI - Math.Acos((Math.Pow(GlobalVar.getLength1(), 2) - Math.Pow(calcModule(_point), 2) + Math.Pow(GlobalVar.getLength2(), 2)) / (2 * GlobalVar.getLength1() * GlobalVar.getLength2())) - alpha
+        alpha = calcPhase(_point) + Math.Acos((Math.Pow(GlobalVar.getLength1(), 2) + Math.Pow(calcModule(_point), 2) - Math.Pow(GlobalVar.getLength2(), 2)) / (2 * GlobalVar.getLength1() * calcModule(_point)))
+        beta = Math.Acos((Math.Pow(GlobalVar.getLength1(), 2) - Math.Pow(calcModule(_point), 2) + Math.Pow(GlobalVar.getLength2(), 2)) / (2 * GlobalVar.getLength1() * GlobalVar.getLength2())) + alpha - Math.PI
         If _isAlpha Then
             GlobalVar.setAlpha(alpha, beta)
         Else
@@ -12,7 +12,7 @@
     End Sub
 
     Public Function calcJoint1(_alpha As Double) As PointC
-        Dim pointJoint1 As PointC
+        Dim pointJoint1 As New PointC
         pointJoint1.setX(GlobalVar.getLength1() * Math.Cos(_alpha))
         pointJoint1.setY(GlobalVar.getLength1() * Math.Sin(_alpha))
         Return pointJoint1
@@ -34,14 +34,14 @@
         Dim pointV2 As New PointC(_velocity.Modul * Math.Cos(_velocity.Phase), _velocity.Modul * Math.Sin(_velocity.Phase))
         Dim Q2 As Double
         Dim omega As Double
-        Dim phase As Double
+        Dim phase As New Angle
         If _isAlpha Then
             Q2 = pointV2.getY - pointV2.getX * Math.Tan(GlobalVar.getAlpha.getSecondAngle + Math.PI / 2)
             point12.setX(Q2 / (Math.Tan(GlobalVar.getAlpha.getMainAngle + Math.PI / 2) - Math.Tan(GlobalVar.getAlpha.getSecondAngle + Math.PI / 2)))
             point12.setY(Math.Tan(GlobalVar.getAlpha.getMainAngle + Math.PI / 2) * point12.getX)
             omega = Geometry.pointDistance(New PointC(0, 0), point12) / GlobalVar.getLength1
-            phase = Math.Atan2(point12.getY, point12.getX)
-            If Not GlobalVar.getAlpha.getMainAngle + Math.PI / 2.0 = phase Then
+            phase.setRad(Math.Atan2(point12.getY, point12.getX))
+            If Not New Angle(GlobalVar.getAlpha.getMainAngle + Math.PI / 2.0, False).isEqual(phase) Then
                 omega *= -1
             End If
         Else
@@ -49,17 +49,18 @@
             point12.setX(Q2 / (Math.Tan(GlobalVar.getBeta.getSecondAngle + Math.PI / 2) - Math.Tan(GlobalVar.getBeta.getMainAngle + Math.PI / 2)))
             point12.setY(Math.Tan(GlobalVar.getBeta.getSecondAngle + Math.PI / 2) * point12.getX)
             omega = Geometry.pointDistance(pointV2, point12) / GlobalVar.getLength2
-            phase = Math.Atan2(pointV2.getY - point12.getY, pointV2.getX - point12.getX)
-            If Not GlobalVar.getBeta.getMainAngle + Math.PI / 2.0 = phase Then
+            phase.setRad(Math.Atan2(pointV2.getY - point12.getY, pointV2.getX - point12.getX))
+            If Not New Angle(GlobalVar.getBeta.getMainAngle + Math.PI / 2.0, False).getRad = phase.getRad Then
                 omega *= -1
             End If
         End If
         Return omega
     End Function
 
-    Public Sub calcBeta(_alpha As MotorAngles, _targetLine As Line, _previousPoint As PointC, _lastPoint As PointC, _isAlpha As Boolean)
-        Dim joint1 As New PointC(calcJoint1(_alpha.getMainAngle))
+    Public Sub calcBeta(_alpha As Angle, _targetLine As Line, _previousPoint As PointC, _lastPoint As PointC, _isAlpha As Boolean)
+        Dim joint1 As New PointC(calcJoint1(_alpha.getRad))
         Dim point1, point2, point As New PointC
+        '=================== VERIFICA CODICE SOTTO (200.01,210.01) ======================
         point1.setX(QuadraticEquation.solve(1 + Math.Pow(_targetLine.getSlope, 2), -2 * joint1.getX + 2 * (_targetLine.getOffset - joint1.getY) * _targetLine.getSlope, Math.Pow(_targetLine.getOffset - joint1.getY, 2) + Math.Pow(joint1.getX, 2) - Math.Pow(GlobalVar.getLength2, 2), 1))
         point1.setY(point1.getX * _targetLine.getSlope + _targetLine.getOffset)
         point2.setX(QuadraticEquation.solve(1 + Math.Pow(_targetLine.getSlope, 2), -2 * joint1.getX + 2 * (_targetLine.getOffset - joint1.getY) * _targetLine.getSlope, Math.Pow(_targetLine.getOffset - joint1.getY, 2) + Math.Pow(joint1.getX, 2) - Math.Pow(GlobalVar.getLength2, 2), -1))

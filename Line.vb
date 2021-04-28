@@ -61,7 +61,7 @@
     End Function
 
     Public Function getIntercectionPoint(_line As Line) As PointC
-        Dim point As PointC
+        Dim point As New PointC
         point.setX((offset - _line.getOffset()) / (_line.getSlope() - slope))
         point.setY(slope * point.getX + offset)
         Return point

@@ -40,4 +40,12 @@
     Public Function getPointF() As PointF
         Return point
     End Function
+
+    Public Function isEqual(_pointC As PointC) As Boolean
+        If Math.Round(getX, 6) = Math.Round(_pointC.getX, 6) And Math.Round(getY, 6) = Math.Round(_pointC.getY, 6) Then
+            Return True
+        End If
+        Return False
+    End Function
+
 End Class

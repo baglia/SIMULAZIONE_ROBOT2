@@ -9,7 +9,7 @@
     End Sub
 
     Public Sub New(_maxSpeed As Integer, _distance As Double)
-        If _maxSpeed < GlobalVar.getMaxSpeed() Then
+        If _maxSpeed <= GlobalVar.getMaxSpeed() Then
             a = (_maxSpeed - GlobalVar.getMinSpeed()) / 2
             b = 2 * Math.PI / _distance
             distance = _distance
@@ -20,7 +20,7 @@
     End Sub
 
     Public Function getSpeed(_distance As Double) As Double
-        If _distance < distance Then
+        If _distance <= distance Then
             isError = False
             Return a * (Math.Cos(b * _distance + Math.PI) + 1) + GlobalVar.getMinSpeed()
         Else

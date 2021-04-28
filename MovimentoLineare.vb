@@ -54,7 +54,7 @@
     End Function
 
     Public Function getNextPeriodA(_isNew As Boolean) As Period
-        Static point As PointC
+        Static point As New PointC
         Dim vel As New Velocity
         If _isNew Then
             point.copy(firstPoint)
@@ -70,10 +70,10 @@
         Dim omega As Double = Cinematica.calcJointSpeed(vel, point, True)
         If omega > 0 Then
             Dim angle As New Angle(GlobalVar.getAlpha.getMainAngle + GlobalVar.getAlpha.getDAngle, False)
-            Cinematica.calcBeta(angle.getRad, targetLine, point, lastPoint, True)
+            Cinematica.calcBeta(angle, targetLine, point, lastPoint, True)
         Else
             Dim angle As New Angle(GlobalVar.getAlpha.getMainAngle - GlobalVar.getAlpha.getDAngle, False)
-            Cinematica.calcBeta(angle.getRad, targetLine, point, lastPoint, True)
+            Cinematica.calcBeta(angle, targetLine, point, lastPoint, True)
         End If
         point.copy(Cinematica.calcPointFromAngles(GlobalVar.getAlpha.getMainAngle, GlobalVar.getAlpha.getSecondAngle))
         If Geometry.pointDistance(point, lastPoint) < GlobalVar.getTolerance Then

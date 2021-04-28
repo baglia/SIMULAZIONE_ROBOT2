@@ -12,7 +12,7 @@
     End Sub
 
     Public Sub New(_maxSpeed As Integer, _distance As Double, _accel As Double)
-        If _accel < GlobalVar.getMaxAccel() Then
+        If _accel <= GlobalVar.getMaxAccel() Then
             calculateProfile(_accel, _distance, _maxSpeed)
             isError = False
         Else
@@ -23,7 +23,7 @@
     Public Sub New(_distance As Double, _time As Integer)
         Dim accel As Double
         accel = 2 * (GlobalVar.getMaxSpeed() - GlobalVar.getMinSpeed()) / (_time - _distance / GlobalVar.getMaxSpeed())
-        If accel < GlobalVar.getMaxAccel() Then
+        If accel <= GlobalVar.getMaxAccel() Then
             calculateProfile(accel, _distance, GlobalVar.getMaxSpeed())
             isError = False
         Else

@@ -25,7 +25,7 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="SIMULAZIONE_ROBOT2.Line" Collapsed="true">
-    <Position X="11.25" Y="4.75" Width="1.5" />
+    <Position X="8.75" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AACAQAAADAAAAAAAAAAAAAAAAAABAAIAgACAQAAAYAA=</HashCode>
       <FileName>Line.vb</FileName>
@@ -49,12 +49,12 @@
       <FileName>Main.vb</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="alpha" />
-      <Field Name="beta" />
-      <Field Name="pointArrivo" />
       <Field Name="pointPartenza" />
+      <Field Name="pointArrivo" />
       <Field Name="pointTerzoPunto" />
       <Field Name="scheduler" />
+      <Field Name="alpha" />
+      <Field Name="beta" />
     </ShowAsAssociation>
   </Class>
   <Class Name="SIMULAZIONE_ROBOT2.MovimentoCircolare" Collapsed="true">
@@ -65,25 +65,18 @@
     </TypeIdentifier>
   </Class>
   <Class Name="SIMULAZIONE_ROBOT2.MovimentoLineare" Collapsed="true">
-    <Position X="6.25" Y="3.75" Width="1.5" />
+    <Position X="6" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gAQgAAIAAAAQQABAAAAAAAAAIAABAAAAAAAAQAAAAAA=</HashCode>
       <FileName>MovimentoLineare.vb</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="cicloidale" />
       <Field Name="firstPoint" />
       <Field Name="lastPoint" />
-      <Field Name="targetLine" />
+      <Field Name="cicloidale" />
       <Field Name="trapezoidal" />
+      <Field Name="targetLine" />
     </ShowAsAssociation>
-  </Class>
-  <Class Name="SIMULAZIONE_ROBOT2.Period" Collapsed="true">
-    <Position X="3.5" Y="7.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAABQAAQAAAAAIgAAAABAAAAIAAEAABgAAAAA=</HashCode>
-      <FileName>Period.vb</FileName>
-    </TypeIdentifier>
   </Class>
   <Class Name="SIMULAZIONE_ROBOT2.PointC" Collapsed="true">
     <Position X="2.75" Y="5" Width="2" />
@@ -94,14 +87,6 @@
   </Class>
   <Class Name="SIMULAZIONE_ROBOT2.Scheduling" Collapsed="true">
     <Position X="6.75" Y="10" Width="1.5" />
-    <AssociationLine Name="periods2" Type="System.Collections.Generic.Queue(Of T)" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="8.25" Y="10.281" />
-        <Point X="8.625" Y="10.281" />
-        <Point X="8.625" Y="10.562" />
-        <Point X="10.25" Y="10.562" />
-      </Path>
-    </AssociationLine>
     <AssociationLine Name="periods1" Type="System.Collections.Generic.Queue(Of T)" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="7.5" Y="10" />
@@ -110,13 +95,21 @@
         <Point X="10.25" Y="10.25" />
       </Path>
     </AssociationLine>
+    <AssociationLine Name="periods2" Type="System.Collections.Generic.Queue(Of T)" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="8.25" Y="10.281" />
+        <Point X="8.625" Y="10.281" />
+        <Point X="8.625" Y="10.562" />
+        <Point X="10.25" Y="10.562" />
+      </Path>
+    </AssociationLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAEAAAAAAABAAACAACAAABg=</HashCode>
       <FileName>Scheduling.vb</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="periods2" />
       <Field Name="periods1" />
+      <Field Name="periods2" />
     </ShowAsAssociation>
   </Class>
   <Class Name="SIMULAZIONE_ROBOT2.Trapezoidal" Collapsed="true">
@@ -145,8 +138,15 @@
       <FileName>Velocity.vb</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="SIMULAZIONE_ROBOT2.Period" Collapsed="true">
+    <Position X="4.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABQAAQAAAAAIgAAAABAAAAIAAEAABgAAAAA=</HashCode>
+      <FileName>Period.vb</FileName>
+    </TypeIdentifier>
+  </Class>
   <Module Name="SIMULAZIONE_ROBOT2.Cinematica" Collapsed="true">
-    <Position X="9.5" Y="0.5" Width="1.5" />
+    <Position X="11.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAUAAAAAAAABAAAQAgAAAAAAAEAAAAQAAAAAAI=</HashCode>
       <FileName>Cinematica.vb</FileName>
@@ -161,6 +161,11 @@
   </Module>
   <Module Name="SIMULAZIONE_ROBOT2.GlobalVar" Collapsed="true">
     <Position X="11.75" Y="6" Width="1.5" />
+    <AssociationLine Name="endPoint" Type="SIMULAZIONE_ROBOT2.PointC">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.097" Y="0.237" />
+      </MemberNameLabel>
+    </AssociationLine>
     <TypeIdentifier>
       <HashCode>AKAgCAJUAEQBQAQgAEAAtAEkAmACgiAgBARQCIAECWg=</HashCode>
       <FileName>GlobalVar.vb</FileName>
@@ -168,8 +173,8 @@
     <ShowAsAssociation>
       <Field Name="alpha" />
       <Field Name="beta" />
-      <Field Name="endPoint" />
       <Field Name="startPoint" />
+      <Field Name="endPoint" />
     </ShowAsAssociation>
   </Module>
   <Module Name="SIMULAZIONE_ROBOT2.QuadraticEquation" Collapsed="true">

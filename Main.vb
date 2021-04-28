@@ -27,6 +27,14 @@
         txtRaggio.Enabled = False
         alpha.setRad(0)
         beta.setRad(Math.PI / 2)
+        numLength1.Value = 370
+        numLength2.Value = 260
+        numStep1.Value = 50000
+        numStep2.Value = 25000
+        numVmax.Value = 100
+        numVmin.Value = 10
+        numAmax.Value = 10
+        numTolleranza.Value = 1
     End Sub
 
 
@@ -34,30 +42,30 @@
         'quando clicco sul form (evento mouseDown)
 
         If setPartenza Then 'se sto settando la partenza salvo le coordinate del punto in cui ho cliccato in pointPartenza
-            pointPartenza.setx(e.X)
-            pointPartenza.sety(e.Y)
+            pointPartenza.setX(e.X * 10)
+            pointPartenza.setY(e.Y * 10)
             setPartenza = False
-            lblP_partenza.Text = "(X,Y) PARTENZA: (" + CStr(e.X) + "," + CStr(e.Y) + ")"
+            lblP_partenza.Text = "(X,Y) PARTENZA: (" + CStr(pointPartenza.getX) + "," + CStr(pointPartenza.getY) + ")"
             btnSetPosPartenza.BackColor = Color.LightGray
             btnSetPosArrivo.BackColor = Color.LightGray
             btnTerzoPunto.BackColor = Color.LightGray
         End If
 
         If setArrivo Then
-            pointArrivo.setx(e.X)
-            pointArrivo.sety(e.Y)
+            pointArrivo.setX(e.X * 10)
+            pointArrivo.setY(e.Y * 10)
             setArrivo = False
-            lblP_arrivo.Text = "(X,Y) ARRIVO: (" + CStr(e.X) + "," + CStr(e.Y) + ")"
+            lblP_arrivo.Text = "(X,Y) ARRIVO: (" + CStr(pointArrivo.getX) + "," + CStr(pointArrivo.getY) + ")"
             btnSetPosPartenza.BackColor = Color.LightGray
             btnSetPosArrivo.BackColor = Color.LightGray
             btnTerzoPunto.BackColor = Color.LightGray
         End If
 
         If setTerzoPunto Then
-            pointTerzoPunto.setx(e.X)
-            pointTerzoPunto.sety(e.Y)
+            pointTerzoPunto.setX(e.X * 10)
+            pointTerzoPunto.setY(e.Y * 10)
             setTerzoPunto = False
-            lblTerzoPunto.Text = "(X,Y) PUNTO INTERMEDIO: (" + CStr(e.X) + "," + CStr(e.Y) + ")"
+            lblTerzoPunto.Text = "(X,Y) PUNTO INTERMEDIO: (" + CStr(pointTerzoPunto.getX) + "," + CStr(pointTerzoPunto.getY) + ")"
             btnSetPosPartenza.BackColor = Color.LightGray
             btnSetPosArrivo.BackColor = Color.LightGray
             btnTerzoPunto.BackColor = Color.LightGray
@@ -172,8 +180,14 @@
         GlobalVar.setIsCycloidal(True)
         GlobalVar.setIsLinear(True)
         GlobalVar.setStart(True)
+        pointPartenza.setX(200)
+        pointPartenza.setY(210)
+        pointArrivo.setX(260)
+        pointArrivo.setY(350)
         GlobalVar.setStartPoint(pointPartenza)
         GlobalVar.setEndPoint(pointArrivo)
+        GlobalVar.setDAlpha(numStep1.Value)
+        GlobalVar.setDBeta(numStep2.Value)
         startCompute()
     End Sub
 
