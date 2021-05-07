@@ -46,6 +46,7 @@ Partial Class Main
         Me.TimerSim = New System.Windows.Forms.Timer(Me.components)
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.lblMov = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.TrackBar1 = New System.Windows.Forms.TrackBar()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -67,6 +68,8 @@ Partial Class Main
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.btnImposta = New System.Windows.Forms.Button()
+        Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
+        Me.NumericUpDown2 = New System.Windows.Forms.NumericUpDown()
         Me.grpSimulazione.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.sliderVelocità, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -82,6 +85,8 @@ Partial Class Main
         CType(Me.numStep1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numLength2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numLength1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.NumericUpDown2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'grpSimulazione
@@ -306,6 +311,15 @@ Partial Class Main
         Me.TabPage1.Text = "Controllo"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
+        'lblMov
+        '
+        Me.lblMov.AutoSize = True
+        Me.lblMov.Location = New System.Drawing.Point(816, 43)
+        Me.lblMov.Name = "lblMov"
+        Me.lblMov.Size = New System.Drawing.Size(59, 17)
+        Me.lblMov.TabIndex = 15
+        Me.lblMov.Text = "Label15"
+        '
         'Button1
         '
         Me.Button1.Location = New System.Drawing.Point(252, 492)
@@ -504,11 +518,32 @@ Partial Class Main
         Me.btnImposta.Text = "IMPOSTA"
         Me.btnImposta.UseVisualStyleBackColor = True
         '
+        'NumericUpDown1
+        '
+        Me.NumericUpDown1.Location = New System.Drawing.Point(841, 97)
+        Me.NumericUpDown1.Maximum = New Decimal(New Integer() {10000000, 0, 0, 0})
+        Me.NumericUpDown1.Minimum = New Decimal(New Integer() {10000000, 0, 0, -2147483648})
+        Me.NumericUpDown1.Name = "NumericUpDown1"
+        Me.NumericUpDown1.Size = New System.Drawing.Size(120, 22)
+        Me.NumericUpDown1.TabIndex = 16
+        '
+        'NumericUpDown2
+        '
+        Me.NumericUpDown2.Location = New System.Drawing.Point(841, 125)
+        Me.NumericUpDown2.Maximum = New Decimal(New Integer() {10000000, 0, 0, 0})
+        Me.NumericUpDown2.Minimum = New Decimal(New Integer() {10000000, 0, 0, -2147483648})
+        Me.NumericUpDown2.Name = "NumericUpDown2"
+        Me.NumericUpDown2.Size = New System.Drawing.Size(120, 22)
+        Me.NumericUpDown2.TabIndex = 17
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(820, 599)
+        Me.ClientSize = New System.Drawing.Size(910, 599)
+        Me.Controls.Add(Me.NumericUpDown2)
+        Me.Controls.Add(Me.NumericUpDown1)
+        Me.Controls.Add(Me.lblMov)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.grpSimulazione)
         Me.MaximizeBox = False
@@ -532,7 +567,10 @@ Partial Class Main
         CType(Me.numStep1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.numLength2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.numLength1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NumericUpDown2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -580,4 +618,7 @@ Partial Class Main
     Friend WithEvents numLength2 As NumericUpDown
     Friend WithEvents numLength1 As NumericUpDown
     Friend WithEvents Button1 As Button
+    Friend WithEvents lblMov As Label
+    Friend WithEvents NumericUpDown1 As NumericUpDown
+    Friend WithEvents NumericUpDown2 As NumericUpDown
 End Class

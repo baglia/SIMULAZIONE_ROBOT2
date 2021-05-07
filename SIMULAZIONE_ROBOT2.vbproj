@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Angle.vb" />
+    <Compile Include="CoordinateSystemGraphics.vb" />
     <Compile Include="MotorAngles.vb" />
     <Compile Include="Cicloidale.vb" />
     <Compile Include="Cinematica.vb" />

@@ -46,11 +46,11 @@
         While (True)
             period1.copy(_movementLinear.getNextPeriodA(False))
             period2.copy(_movementLinear.getNextPeriodB(False))
+            periods1.Enqueue(period1)
+            periods2.Enqueue(period2)
             If period1.getIsEnd And period2.getIsEnd Then
                 Exit While
             End If
-            periods1.Enqueue(period1)
-            periods2.Enqueue(period2)
         End While
     End Sub
 

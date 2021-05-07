@@ -32,20 +32,20 @@
         isEnd = _isEnd
     End Sub
 
-    Public Function getPeriod()
+    Public Function getPeriod() As Integer
         Return period
     End Function
 
-    Public Function getIsPeriod()
+    Public Function getIsPeriod() As Boolean
         Return isPeriod
     End Function
 
-    Public Function getIsEnd()
+    Public Function getIsEnd() As Boolean
         Return isEnd
     End Function
 
     Public Sub copy(_period As Period)
-        setPeriod(_period.getIsPeriod)
+        setPeriod(_period.getPeriod)
         setIsPeriod(_period.getIsPeriod)
         setIsEnd(_period.getIsEnd)
     End Sub

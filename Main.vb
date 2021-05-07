@@ -6,11 +6,16 @@
     Dim setPartenza As Boolean = False
     Dim setArrivo As Boolean = False
     Dim setTerzoPunto As Boolean = False
+    Dim isEndMovement As Boolean = True
     Dim scheduler As New Scheduling
     Dim alpha, beta As New Angle()
     Dim thPeriod1 As New Threading.Thread(AddressOf calcPeriod1)
     Dim thPeriod2 As New Threading.Thread(AddressOf calcPeriod2)
     Dim thPopulate As New Threading.Thread(AddressOf populateQueue)
+    Dim pointConverter As New CoordinateSystemGraphics
+    Dim value As Integer
+    Const _FACTOR As Integer = 2
+    Private Shared LockObject As New Object()
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         pointPartenza.setX(0)
@@ -35,6 +40,9 @@
         numVmin.Value = 10
         numAmax.Value = 10
         numTolleranza.Value = 1
+        pointConverter.setValues(panelSimTop.Width / 2, panelSimTop.Height / 2, _FACTOR)
+        'TimerSim.Start()
+        setParam()
     End Sub
 
 
@@ -42,8 +50,7 @@
         'quando clicco sul form (evento mouseDown)
 
         If setPartenza Then 'se sto settando la partenza salvo le coordinate del punto in cui ho cliccato in pointPartenza
-            pointPartenza.setX(e.X * 10)
-            pointPartenza.setY(e.Y * 10)
+            pointPartenza.copy(pointConverter.graphic2World(New PointF(e.X, e.Y)))
             setPartenza = False
             lblP_partenza.Text = "(X,Y) PARTENZA: (" + CStr(pointPartenza.getX) + "," + CStr(pointPartenza.getY) + ")"
             btnSetPosPartenza.BackColor = Color.LightGray
@@ -52,8 +59,7 @@
         End If
 
         If setArrivo Then
-            pointArrivo.setX(e.X * 10)
-            pointArrivo.setY(e.Y * 10)
+            pointArrivo.copy(pointConverter.graphic2World(New PointF(e.X, e.Y)))
             setArrivo = False
             lblP_arrivo.Text = "(X,Y) ARRIVO: (" + CStr(pointArrivo.getX) + "," + CStr(pointArrivo.getY) + ")"
             btnSetPosPartenza.BackColor = Color.LightGray
@@ -62,8 +68,7 @@
         End If
 
         If setTerzoPunto Then
-            pointTerzoPunto.setX(e.X * 10)
-            pointTerzoPunto.setY(e.Y * 10)
+            pointTerzoPunto.copy(pointConverter.graphic2World(New PointF(e.X, e.Y)))
             setTerzoPunto = False
             lblTerzoPunto.Text = "(X,Y) PUNTO INTERMEDIO: (" + CStr(pointTerzoPunto.getX) + "," + CStr(pointTerzoPunto.getY) + ")"
             btnSetPosPartenza.BackColor = Color.LightGray
@@ -104,15 +109,17 @@
     Private Sub simulazione()
 
         Dim gTop As Graphics = panelSimTop.CreateGraphics()
-        Dim verde As New Pen(Color.Green, 8)
-        Dim giallo As New Pen(Color.GreenYellow, 8)
-        Dim azzurro As New Pen(Color.LightBlue, 8)
-        Dim origineTop As New Point(panelSimTop.Width / 2, panelSimTop.Height / 2)
-        Dim j1 As New Point
-        Dim pleft As New Point
-        Dim pTop As New Point
+        Dim penRobot As New Pen(Color.Green, 8)
+        Dim penLine As New Pen(Color.GreenYellow, 4)
+        Dim penJoints As New Pen(Color.LightBlue, 8)
+        Dim origin As New PointF(pointConverter.world2Graphic(New PointC(0, 0)).X, pointConverter.world2Graphic(New PointC(0, 0)).Y)
+        Dim j1 As New PointF(pointConverter.world2Graphic(New PointC(GlobalVar.getLength1 * Math.Cos(alpha.getRad), GlobalVar.getLength1 * Math.Sin(alpha.getRad))).X, pointConverter.world2Graphic(New PointC(GlobalVar.getLength1 * Math.Cos(alpha.getRad), GlobalVar.getLength1 * Math.Sin(alpha.getRad))).Y)
+        Dim j2 As New PointF(pointConverter.world2Graphic(Cinematica.calcPointFromAngles(alpha.getRad, beta.getRad)).X, pointConverter.world2Graphic(Cinematica.calcPointFromAngles(alpha.getRad, beta.getRad)).Y)
         gTop.Clear(Color.Black)
-        gTop.DrawLine(azzurro, pointPartenza.getPointF, pointArrivo.getPointF)
+        gTop.DrawLine(penJoints, pointConverter.world2Graphic(pointPartenza), pointConverter.world2Graphic(pointArrivo))
+        gTop.DrawLine(penRobot, origin, j1)
+        gTop.DrawLine(penRobot, j1, j2)
+
 
     End Sub
 
@@ -124,40 +131,52 @@
     End Sub
 
     Private Sub calcPeriod1()
-        Dim period As New Period(scheduler.getPeriod1())
-        If Not period.getIsPeriod Then
-            Threading.Thread.Sleep(0)
-            Return
-        ElseIf period.getIsEnd Then
-            thPeriod1.Abort()
-        ElseIf period.getIsPeriod > 0 Then
-            Threading.Thread.Sleep(period.getIsPeriod)
-            alpha.setRad(alpha.getRad + GlobalVar.getAlpha.getDAngle)
-        ElseIf period.getIsPeriod = 0 Then
-            Threading.Thread.Sleep(period.getIsPeriod)
-        Else
-            Threading.Thread.Sleep(Math.Abs(period.getIsPeriod))
-            alpha.setRad(alpha.getRad - GlobalVar.getAlpha.getDAngle)
-        End If
+        Dim period As New Period()
+        While True
+            period.copy(scheduler.getPeriod1())
+            value += 1
+
+            If Not period.getIsPeriod Then
+                    Threading.Thread.Sleep(0)
+                ElseIf period.getIsEnd Then
+                    thPeriod1.Abort()
+                    isEndMovement = True
+                    Return
+                ElseIf period.getIsPeriod > 0 Then
+                    Threading.Thread.Sleep(period.getIsPeriod)
+                    alpha.setRad(alpha.getRad + GlobalVar.getAlpha.getDAngle)
+                ElseIf period.getIsPeriod = 0 Then
+                    Threading.Thread.Sleep(period.getIsPeriod)
+                Else
+                    Threading.Thread.Sleep(Math.Abs(period.getPeriod))
+                    alpha.setRad(alpha.getRad - GlobalVar.getAlpha.getDAngle)
+                End If
+
+        End While
     End Sub
 
     Private Sub calcPeriod2()
-        Dim period As New Period(scheduler.getPeriod2())
-        If Not period.getIsPeriod Then
-            Threading.Thread.Sleep(0)
-            Return
-        ElseIf period.getIsEnd Then
-            thPeriod2.Abort()
-        ElseIf period.getIsPeriod > 0 Then
-            Threading.Thread.Sleep(period.getIsPeriod)
-            alpha.setRad(beta.getRad + GlobalVar.getBeta.getDAngle)
-        ElseIf period.getIsPeriod = 0 Then
-            Threading.Thread.Sleep(period.getIsPeriod)
-        Else
-            Threading.Thread.Sleep(Math.Abs(period.getIsPeriod))
-            alpha.setRad(beta.getRad - GlobalVar.getBeta.getDAngle)
-        End If
+        Dim period As New Period()
+        While True
+            period.copy(scheduler.getPeriod2)
 
+            If Not period.getIsPeriod Then
+                    Threading.Thread.Sleep(0)
+                ElseIf period.getIsEnd Then
+                    thPeriod2.Abort()
+                    isEndMovement = True
+                    Return
+                ElseIf period.getIsPeriod > 0 Then
+                    Threading.Thread.Sleep(period.getIsPeriod)
+                    beta.setRad(beta.getRad + GlobalVar.getBeta.getDAngle)
+                ElseIf period.getIsPeriod = 0 Then
+                    Threading.Thread.Sleep(period.getIsPeriod)
+                Else
+                    Threading.Thread.Sleep(Math.Abs(period.getPeriod))
+                    beta.setRad(beta.getRad - GlobalVar.getBeta.getDAngle)
+                End If
+
+        End While
     End Sub
 
     Private Sub populateQueue()
@@ -166,6 +185,38 @@
     End Sub
 
     Private Sub btnImposta_Click(sender As Object, e As EventArgs) Handles btnImposta.Click
+        setParam()
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        If isEndMovement Then
+            GlobalVar.setIsCycloidal(True)
+            GlobalVar.setIsLinear(True)
+            GlobalVar.setStart(True)
+            'pointPartenza.setX(200)
+            'pointPartenza.setY(210)
+            'pointArrivo.setX(260)
+            'pointArrivo.setY(350)
+            GlobalVar.setStartPoint(pointPartenza)
+            GlobalVar.setEndPoint(pointArrivo)
+            GlobalVar.setDAlpha(numStep1.Value)
+            GlobalVar.setDBeta(numStep2.Value)
+            startCompute()
+        End If
+    End Sub
+
+    Private Sub TimerSim_Tick(sender As Object, e As EventArgs) Handles TimerSim.Tick
+        simulazione()
+        If Not isEndMovement Then
+            lblMov.Text = "MOVING"
+        Else
+            lblMov.Text = "NOT MOVING"
+            TimerSim.Stop()
+        End If
+        NumericUpDown1.Value = alpha.getDeg
+        NumericUpDown2.Value = beta.getDeg
+    End Sub
+    Private Sub setParam()
         GlobalVar.setLength1(numLength1.Value)
         GlobalVar.setLength2(numLength2.Value)
         GlobalVar.setDAlpha(numStep1.Value)
@@ -174,27 +225,18 @@
         GlobalVar.setMaxSpeed(numVmax.Value)
         GlobalVar.setMinSpeed(numVmin.Value)
         GlobalVar.setTolerance(numTolleranza.Value)
-    End Sub
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        GlobalVar.setIsCycloidal(True)
-        GlobalVar.setIsLinear(True)
-        GlobalVar.setStart(True)
-        pointPartenza.setX(200)
-        pointPartenza.setY(210)
-        pointArrivo.setX(260)
-        pointArrivo.setY(350)
-        GlobalVar.setStartPoint(pointPartenza)
-        GlobalVar.setEndPoint(pointArrivo)
-        GlobalVar.setDAlpha(numStep1.Value)
-        GlobalVar.setDBeta(numStep2.Value)
-        startCompute()
+        Cinematica.calcAngles(pointPartenza, True)
+        alpha.setRad(GlobalVar.alpha.getMainAngle)
+        beta.setRad(GlobalVar.alpha.getSecondAngle)
     End Sub
 
     Private Sub startCompute()
+        isEndMovement = False
+        TimerSim.Start()
         thPeriod1.Start()
         thPeriod2.Start()
         thPopulate.Start()
+        '================= VEDERE CICLO THREAD ======================
     End Sub
 
 
