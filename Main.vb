@@ -1,4 +1,5 @@
-﻿Public Class Main
+﻿Imports System.Threading
+Public Class Main
 
     Dim pointPartenza As New PointC
     Dim pointArrivo As New PointC
@@ -137,20 +138,20 @@
             value += 1
 
             If Not period.getIsPeriod Then
-                    Threading.Thread.Sleep(0)
-                ElseIf period.getIsEnd Then
-                    thPeriod1.Abort()
-                    isEndMovement = True
-                    Return
-                ElseIf period.getIsPeriod > 0 Then
-                    Threading.Thread.Sleep(period.getIsPeriod)
-                    alpha.setRad(alpha.getRad + GlobalVar.getAlpha.getDAngle)
-                ElseIf period.getIsPeriod = 0 Then
-                    Threading.Thread.Sleep(period.getIsPeriod)
-                Else
-                    Threading.Thread.Sleep(Math.Abs(period.getPeriod))
-                    alpha.setRad(alpha.getRad - GlobalVar.getAlpha.getDAngle)
-                End If
+                Threading.Thread.Sleep(0)
+            ElseIf period.getIsEnd Then
+                thPeriod1.Abort()
+                isEndMovement = True
+                Return
+            ElseIf period.getIsPeriod > 0 Then
+                Threading.Thread.Sleep(period.getIsPeriod)
+                alpha.setRad(alpha.getRad + GlobalVar.getAlpha.getDAngle)
+            ElseIf period.getIsPeriod = 0 Then
+                Threading.Thread.Sleep(period.getIsPeriod)
+            Else
+                Threading.Thread.Sleep(Math.Abs(period.getPeriod))
+                alpha.setRad(alpha.getRad - GlobalVar.getAlpha.getDAngle)
+            End If
 
         End While
     End Sub
@@ -161,20 +162,20 @@
             period.copy(scheduler.getPeriod2)
 
             If Not period.getIsPeriod Then
-                    Threading.Thread.Sleep(0)
-                ElseIf period.getIsEnd Then
-                    thPeriod2.Abort()
-                    isEndMovement = True
-                    Return
-                ElseIf period.getIsPeriod > 0 Then
-                    Threading.Thread.Sleep(period.getIsPeriod)
-                    beta.setRad(beta.getRad + GlobalVar.getBeta.getDAngle)
-                ElseIf period.getIsPeriod = 0 Then
-                    Threading.Thread.Sleep(period.getIsPeriod)
-                Else
-                    Threading.Thread.Sleep(Math.Abs(period.getPeriod))
-                    beta.setRad(beta.getRad - GlobalVar.getBeta.getDAngle)
-                End If
+                Threading.Thread.Sleep(0)
+            ElseIf period.getIsEnd Then
+                thPeriod2.Abort()
+                isEndMovement = True
+                Return
+            ElseIf period.getIsPeriod > 0 Then
+                Threading.Thread.Sleep(period.getIsPeriod)
+                beta.setRad(beta.getRad + GlobalVar.getBeta.getDAngle)
+            ElseIf period.getIsPeriod = 0 Then
+                Threading.Thread.Sleep(period.getIsPeriod)
+            Else
+                Threading.Thread.Sleep(Math.Abs(period.getPeriod))
+                beta.setRad(beta.getRad - GlobalVar.getBeta.getDAngle)
+            End If
 
         End While
     End Sub
