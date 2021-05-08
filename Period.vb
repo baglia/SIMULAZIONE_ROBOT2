@@ -13,10 +13,16 @@
         isEnd = False
     End Sub
 
-    Public Sub New(_isEnd As Boolean)
-        isPeriod = _isEnd
-        isEnd = _isEnd
+    Public Sub New(_isEnd As Boolean, _isError As Boolean)
+        If Not _isError Then
+            isPeriod = _isEnd
+            isEnd = _isEnd
+        Else
+            isPeriod = False
+            isEnd = True
+        End If
     End Sub
+
 
     Public Sub New(_period As Period)
         copy(_period)

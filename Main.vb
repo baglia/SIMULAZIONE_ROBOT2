@@ -17,6 +17,7 @@ Public Class Main
     Dim value As Integer
     Const _FACTOR As Integer = 2
     Private Shared LockObject As New Object()
+    Private isError As Boolean
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         pointPartenza.setX(0)
@@ -44,6 +45,8 @@ Public Class Main
         pointConverter.setValues(panelSimTop.Width / 2, panelSimTop.Height / 2, _FACTOR)
         'TimerSim.Start()
         setParam()
+        comboTipoSpostamento.SelectedIndex = 0
+        comboAccelerazioneLineare.SelectedIndex = 1
     End Sub
 
 
@@ -137,19 +140,24 @@ Public Class Main
             period.copy(scheduler.getPeriod1())
             value += 1
 
-            If Not period.getIsPeriod Then
-                Threading.Thread.Sleep(0)
+            If Not period.getIsPeriod And Not period.getIsEnd Then
+                'Threading.Thread.Sleep(0)
+            ElseIf Not period.getIsPeriod And period.getIsEnd Then
+                thPeriod2.Abort()
+                isEndMovement = True
+                isError = True
+                Return
             ElseIf period.getIsEnd Then
                 thPeriod1.Abort()
                 isEndMovement = True
                 Return
-            ElseIf period.getIsPeriod > 0 Then
-                Threading.Thread.Sleep(period.getIsPeriod)
+            ElseIf period.getPeriod > 0 Then
+                'Threading.Thread.Sleep(period.getPeriod)
                 alpha.setRad(alpha.getRad + GlobalVar.getAlpha.getDAngle)
-            ElseIf period.getIsPeriod = 0 Then
-                Threading.Thread.Sleep(period.getIsPeriod)
+            ElseIf period.getPeriod = 0 Then
+                'Threading.Thread.Sleep(period.getPeriod)
             Else
-                Threading.Thread.Sleep(Math.Abs(period.getPeriod))
+                'Threading.Thread.Sleep(Math.Abs(period.getPeriod))
                 alpha.setRad(alpha.getRad - GlobalVar.getAlpha.getDAngle)
             End If
 
@@ -161,19 +169,24 @@ Public Class Main
         While True
             period.copy(scheduler.getPeriod2)
 
-            If Not period.getIsPeriod Then
-                Threading.Thread.Sleep(0)
+            If Not period.getIsPeriod And Not period.getIsEnd Then
+                'Threading.Thread.Sleep(0)
+            ElseIf Not period.getIsPeriod And period.getIsEnd Then
+                thPeriod2.Abort()
+                isEndMovement = True
+                isError = True
+                Return
             ElseIf period.getIsEnd Then
                 thPeriod2.Abort()
                 isEndMovement = True
                 Return
-            ElseIf period.getIsPeriod > 0 Then
-                Threading.Thread.Sleep(period.getIsPeriod)
+            ElseIf period.getPeriod > 0 Then
+                'Threading.Thread.Sleep(period.getPeriod)
                 beta.setRad(beta.getRad + GlobalVar.getBeta.getDAngle)
-            ElseIf period.getIsPeriod = 0 Then
-                Threading.Thread.Sleep(period.getIsPeriod)
+            ElseIf period.getPeriod = 0 Then
+                'Threading.Thread.Sleep(period.getPeriod)
             Else
-                Threading.Thread.Sleep(Math.Abs(period.getPeriod))
+                'Threading.Thread.Sleep(Math.Abs(period.getPeriod))
                 beta.setRad(beta.getRad - GlobalVar.getBeta.getDAngle)
             End If
 
@@ -194,28 +207,32 @@ Public Class Main
             GlobalVar.setIsCycloidal(True)
             GlobalVar.setIsLinear(True)
             GlobalVar.setStart(True)
-            'pointPartenza.setX(200)
-            'pointPartenza.setY(210)
-            'pointArrivo.setX(260)
-            'pointArrivo.setY(350)
+            'pointPartenza.setX(260)
+            'pointPartenza.setY(328)
+            'pointArrivo.setX(394)
+            'pointArrivo.setY(256)
             GlobalVar.setStartPoint(pointPartenza)
             GlobalVar.setEndPoint(pointArrivo)
             GlobalVar.setDAlpha(numStep1.Value)
             GlobalVar.setDBeta(numStep2.Value)
             startCompute()
+            setParam()
         End If
     End Sub
 
     Private Sub TimerSim_Tick(sender As Object, e As EventArgs) Handles TimerSim.Tick
         simulazione()
-        If Not isEndMovement Then
+        If isError Then
+            lblMov.Text = "error"
+        ElseIf Not isEndMovement Then
             lblMov.Text = "MOVING"
         Else
             lblMov.Text = "NOT MOVING"
             TimerSim.Stop()
         End If
-        NumericUpDown1.Value = alpha.getDeg
-        NumericUpDown2.Value = beta.getDeg
+        'NumericUpDown1.Value = Math.Floor(alpha.getDeg)
+        'NumericUpDown2.Value = Math.Floor(beta.getDeg)
+
     End Sub
     Private Sub setParam()
         GlobalVar.setLength1(numLength1.Value)
@@ -229,6 +246,13 @@ Public Class Main
         Cinematica.calcAngles(pointPartenza, True)
         alpha.setRad(GlobalVar.alpha.getMainAngle)
         beta.setRad(GlobalVar.alpha.getSecondAngle)
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Cinematica.calcAngles(pointArrivo, True)
+        alpha.setRad(GlobalVar.getAlpha.getMainAngle)
+        beta.setRad(GlobalVar.getAlpha.getSecondAngle)
+        simulazione()
     End Sub
 
     Private Sub startCompute()

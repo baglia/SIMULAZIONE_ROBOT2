@@ -60,7 +60,6 @@
     Public Sub calcBeta(_alpha As Angle, _targetLine As Line, _previousPoint As PointC, _lastPoint As PointC, _isAlpha As Boolean)
         Dim joint1 As New PointC(calcJoint1(_alpha))
         Dim point1, point2, point As New PointC
-        '=================== VERIFICA CODICE SOTTO (200.01,210.01) ======================
         point1.setX(QuadraticEquation.solve(1 + Math.Pow(_targetLine.getSlope, 2), -2 * joint1.getX + 2 * (_targetLine.getOffset - joint1.getY) * _targetLine.getSlope, Math.Pow(_targetLine.getOffset - joint1.getY, 2) + Math.Pow(joint1.getX, 2) - Math.Pow(GlobalVar.getLength2, 2), 1))
         point1.setY(point1.getX * _targetLine.getSlope + _targetLine.getOffset)
         point2.setX(QuadraticEquation.solve(1 + Math.Pow(_targetLine.getSlope, 2), -2 * joint1.getX + 2 * (_targetLine.getOffset - joint1.getY) * _targetLine.getSlope, Math.Pow(_targetLine.getOffset - joint1.getY, 2) + Math.Pow(joint1.getX, 2) - Math.Pow(GlobalVar.getLength2, 2), -1))

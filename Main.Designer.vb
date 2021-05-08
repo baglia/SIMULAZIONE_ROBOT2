@@ -70,6 +70,7 @@ Partial Class Main
         Me.btnImposta = New System.Windows.Forms.Button()
         Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
         Me.NumericUpDown2 = New System.Windows.Forms.NumericUpDown()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.grpSimulazione.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.sliderVelocità, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -94,7 +95,7 @@ Partial Class Main
         Me.grpSimulazione.Controls.Add(Me.panelSimTop)
         Me.grpSimulazione.Location = New System.Drawing.Point(12, 12)
         Me.grpSimulazione.Name = "grpSimulazione"
-        Me.grpSimulazione.Size = New System.Drawing.Size(449, 546)
+        Me.grpSimulazione.Size = New System.Drawing.Size(646, 546)
         Me.grpSimulazione.TabIndex = 0
         Me.grpSimulazione.TabStop = False
         Me.grpSimulazione.Text = "Simulazione"
@@ -104,7 +105,7 @@ Partial Class Main
         Me.panelSimTop.BackColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.panelSimTop.Location = New System.Drawing.Point(6, 21)
         Me.panelSimTop.Name = "panelSimTop"
-        Me.panelSimTop.Size = New System.Drawing.Size(437, 519)
+        Me.panelSimTop.Size = New System.Drawing.Size(634, 519)
         Me.panelSimTop.TabIndex = 0
         '
         'lblP_partenza
@@ -279,7 +280,7 @@ Partial Class Main
         '
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Location = New System.Drawing.Point(467, 12)
+        Me.TabControl1.Location = New System.Drawing.Point(664, 12)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         Me.TabControl1.Size = New System.Drawing.Size(347, 546)
@@ -314,7 +315,7 @@ Partial Class Main
         'lblMov
         '
         Me.lblMov.AutoSize = True
-        Me.lblMov.Location = New System.Drawing.Point(816, 43)
+        Me.lblMov.Location = New System.Drawing.Point(1013, 43)
         Me.lblMov.Name = "lblMov"
         Me.lblMov.Size = New System.Drawing.Size(59, 17)
         Me.lblMov.TabIndex = 15
@@ -520,7 +521,7 @@ Partial Class Main
         '
         'NumericUpDown1
         '
-        Me.NumericUpDown1.Location = New System.Drawing.Point(841, 97)
+        Me.NumericUpDown1.Location = New System.Drawing.Point(1038, 97)
         Me.NumericUpDown1.Maximum = New Decimal(New Integer() {10000000, 0, 0, 0})
         Me.NumericUpDown1.Minimum = New Decimal(New Integer() {10000000, 0, 0, -2147483648})
         Me.NumericUpDown1.Name = "NumericUpDown1"
@@ -529,18 +530,28 @@ Partial Class Main
         '
         'NumericUpDown2
         '
-        Me.NumericUpDown2.Location = New System.Drawing.Point(841, 125)
+        Me.NumericUpDown2.Location = New System.Drawing.Point(1038, 125)
         Me.NumericUpDown2.Maximum = New Decimal(New Integer() {10000000, 0, 0, 0})
         Me.NumericUpDown2.Minimum = New Decimal(New Integer() {10000000, 0, 0, -2147483648})
         Me.NumericUpDown2.Name = "NumericUpDown2"
         Me.NumericUpDown2.Size = New System.Drawing.Size(120, 22)
         Me.NumericUpDown2.TabIndex = 17
         '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(1066, 197)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 23)
+        Me.Button2.TabIndex = 18
+        Me.Button2.Text = "Button2"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(910, 599)
+        Me.ClientSize = New System.Drawing.Size(1162, 599)
+        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.NumericUpDown2)
         Me.Controls.Add(Me.NumericUpDown1)
         Me.Controls.Add(Me.lblMov)
@@ -621,4 +632,5 @@ Partial Class Main
     Friend WithEvents lblMov As Label
     Friend WithEvents NumericUpDown1 As NumericUpDown
     Friend WithEvents NumericUpDown2 As NumericUpDown
+    Friend WithEvents Button2 As Button
 End Class

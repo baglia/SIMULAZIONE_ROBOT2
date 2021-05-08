@@ -58,8 +58,13 @@
         Dim vel As New Velocity
         If _isNew Then
             point.copy(firstPoint)
+            Cinematica.calcAngles(point, True)
         End If
-        Cinematica.calcAngles(point, True)
+
+        If Not targetLine.isPointOf(point) Then
+            Return New Period(True, True)
+        End If
+
         If isTrapezoidal Then
             vel.Modul = trapezoidal.getSpeed(Geometry.pointDistance(point, firstPoint))
 
@@ -77,18 +82,23 @@
         End If
         point.copy(Cinematica.calcPointFromAngles(GlobalVar.getAlpha.getMainAngle, GlobalVar.getAlpha.getSecondAngle))
         If Geometry.pointDistance(point, lastPoint) < GlobalVar.getTolerance Then
-            Return New Period(True)
+            Return New Period(True, False)
         End If
         Return New Period(CInt((GlobalVar.getAlpha.getDAngle / omega) * 1000))
     End Function
 
     Public Function getNextPeriodB(_isNew As Boolean) As Period
+
         Static point As New PointC
         Dim vel As New Velocity
         If _isNew Then
             point.copy(firstPoint)
+            Cinematica.calcAngles(point, False)
         End If
-        Cinematica.calcAngles(point, False)
+
+        If Not targetLine.isPointOf(point) Then
+            Return New Period(True, True)
+        End If
         If isTrapezoidal Then
             vel.Modul = trapezoidal.getSpeed(Geometry.pointDistance(point, firstPoint))
         Else
@@ -105,9 +115,9 @@
         End If
         point.copy(Cinematica.calcPointFromAngles(GlobalVar.getBeta.getSecondAngle, GlobalVar.getBeta.getMainAngle))
         If Geometry.pointDistance(point, lastPoint) < GlobalVar.getTolerance Then
-            Return New Period(True)
+            Return New Period(True, False)
         End If
-        Return New Period(CInt((GlobalVar.getAlpha.getDAngle / omega) * 1000))
+        Return New Period(CInt((GlobalVar.getBeta.getDAngle / omega) * 1000))
     End Function
 
 End Class
