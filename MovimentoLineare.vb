@@ -62,7 +62,8 @@
         End If
 
         If Not targetLine.isPointOf(point) Then
-            Return New Period(True, True)
+            'Return New Period(True, True)
+            Dim a As Integer = 22
         End If
 
         If isTrapezoidal Then
@@ -97,7 +98,8 @@
         End If
 
         If Not targetLine.isPointOf(point) Then
-            Return New Period(True, True)
+            'Return New Period(True, True)
+            Dim a As Integer = 22
         End If
         If isTrapezoidal Then
             vel.Modul = trapezoidal.getSpeed(Geometry.pointDistance(point, firstPoint))
