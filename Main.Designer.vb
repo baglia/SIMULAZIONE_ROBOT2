@@ -46,7 +46,6 @@ Partial Class Main
         Me.TimerSim = New System.Windows.Forms.Timer(Me.components)
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.lblMov = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.TrackBar1 = New System.Windows.Forms.TrackBar()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -68,6 +67,7 @@ Partial Class Main
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.btnImposta = New System.Windows.Forms.Button()
+        Me.lblMov = New System.Windows.Forms.Label()
         Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
         Me.NumericUpDown2 = New System.Windows.Forms.NumericUpDown()
         Me.Button2 = New System.Windows.Forms.Button()
@@ -312,15 +312,6 @@ Partial Class Main
         Me.TabPage1.Text = "Controllo"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
-        'lblMov
-        '
-        Me.lblMov.AutoSize = True
-        Me.lblMov.Location = New System.Drawing.Point(1013, 43)
-        Me.lblMov.Name = "lblMov"
-        Me.lblMov.Size = New System.Drawing.Size(59, 17)
-        Me.lblMov.TabIndex = 15
-        Me.lblMov.Text = "Label15"
-        '
         'Button1
         '
         Me.Button1.Location = New System.Drawing.Point(252, 492)
@@ -377,7 +368,7 @@ Partial Class Main
         'numTolleranza
         '
         Me.numTolleranza.Location = New System.Drawing.Point(246, 310)
-        Me.numTolleranza.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.numTolleranza.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
         Me.numTolleranza.Name = "numTolleranza"
         Me.numTolleranza.Size = New System.Drawing.Size(72, 22)
         Me.numTolleranza.TabIndex = 23
@@ -385,6 +376,7 @@ Partial Class Main
         'numAmax
         '
         Me.numAmax.Location = New System.Drawing.Point(246, 270)
+        Me.numAmax.Maximum = New Decimal(New Integer() {1000000000, 0, 0, 0})
         Me.numAmax.Name = "numAmax"
         Me.numAmax.Size = New System.Drawing.Size(72, 22)
         Me.numAmax.TabIndex = 22
@@ -392,7 +384,7 @@ Partial Class Main
         'numVmax
         '
         Me.numVmax.Location = New System.Drawing.Point(246, 230)
-        Me.numVmax.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.numVmax.Maximum = New Decimal(New Integer() {1000000000, 0, 0, 0})
         Me.numVmax.Name = "numVmax"
         Me.numVmax.Size = New System.Drawing.Size(72, 22)
         Me.numVmax.TabIndex = 21
@@ -400,7 +392,7 @@ Partial Class Main
         'numVmin
         '
         Me.numVmin.Location = New System.Drawing.Point(246, 190)
-        Me.numVmin.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.numVmin.Maximum = New Decimal(New Integer() {1000000000, 0, 0, 0})
         Me.numVmin.Name = "numVmin"
         Me.numVmin.Size = New System.Drawing.Size(72, 22)
         Me.numVmin.TabIndex = 20
@@ -408,7 +400,7 @@ Partial Class Main
         'numStep2
         '
         Me.numStep2.Location = New System.Drawing.Point(246, 150)
-        Me.numStep2.Maximum = New Decimal(New Integer() {250000, 0, 0, 0})
+        Me.numStep2.Maximum = New Decimal(New Integer() {1000000000, 0, 0, 0})
         Me.numStep2.Name = "numStep2"
         Me.numStep2.Size = New System.Drawing.Size(72, 22)
         Me.numStep2.TabIndex = 19
@@ -416,7 +408,7 @@ Partial Class Main
         'numStep1
         '
         Me.numStep1.Location = New System.Drawing.Point(246, 110)
-        Me.numStep1.Maximum = New Decimal(New Integer() {100000, 0, 0, 0})
+        Me.numStep1.Maximum = New Decimal(New Integer() {1000000000, 0, 0, 0})
         Me.numStep1.Name = "numStep1"
         Me.numStep1.Size = New System.Drawing.Size(72, 22)
         Me.numStep1.TabIndex = 18
@@ -424,7 +416,7 @@ Partial Class Main
         'numLength2
         '
         Me.numLength2.Location = New System.Drawing.Point(246, 70)
-        Me.numLength2.Maximum = New Decimal(New Integer() {300, 0, 0, 0})
+        Me.numLength2.Maximum = New Decimal(New Integer() {1000000000, 0, 0, 0})
         Me.numLength2.Name = "numLength2"
         Me.numLength2.Size = New System.Drawing.Size(72, 22)
         Me.numLength2.TabIndex = 17
@@ -432,7 +424,7 @@ Partial Class Main
         'numLength1
         '
         Me.numLength1.Location = New System.Drawing.Point(246, 30)
-        Me.numLength1.Maximum = New Decimal(New Integer() {400, 0, 0, 0})
+        Me.numLength1.Maximum = New Decimal(New Integer() {1000000000, 0, 0, 0})
         Me.numLength1.Name = "numLength1"
         Me.numLength1.Size = New System.Drawing.Size(72, 22)
         Me.numLength1.TabIndex = 16
@@ -518,6 +510,15 @@ Partial Class Main
         Me.btnImposta.TabIndex = 0
         Me.btnImposta.Text = "IMPOSTA"
         Me.btnImposta.UseVisualStyleBackColor = True
+        '
+        'lblMov
+        '
+        Me.lblMov.AutoSize = True
+        Me.lblMov.Location = New System.Drawing.Point(1013, 43)
+        Me.lblMov.Name = "lblMov"
+        Me.lblMov.Size = New System.Drawing.Size(59, 17)
+        Me.lblMov.TabIndex = 15
+        Me.lblMov.Text = "Label15"
         '
         'NumericUpDown1
         '

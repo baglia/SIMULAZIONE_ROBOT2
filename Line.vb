@@ -54,7 +54,7 @@
     End Function
 
     Public Function isPointOf(_point As PointC) As Boolean
-        If Math.Round(_point.getY, 6) = Math.Round(slope * _point.getX + offset, 6) Then
+        If Math.Round(_point.getY, 0) = Math.Round(slope * _point.getX + offset, 0) Then
             Return True
         End If
         Return False

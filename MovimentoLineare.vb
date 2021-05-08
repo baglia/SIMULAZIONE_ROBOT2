@@ -105,8 +105,11 @@
             vel.Modul = trapezoidal.getSpeed(Geometry.pointDistance(point, firstPoint))
         Else
             vel.Modul = cicloidale.getSpeed(Geometry.pointDistance(point, firstPoint))
+            If cicloidale.getError Then
+                Dim a As Integer = 22
+            End If
         End If
-        vel.Phase = Math.Atan2(lastPoint.getY - firstPoint.getY, lastPoint.getX - firstPoint.getX)
+            vel.Phase = Math.Atan2(lastPoint.getY - firstPoint.getY, lastPoint.getX - firstPoint.getX)
         Dim omega As Double = Cinematica.calcJointSpeed(vel, point, False)
         If omega > 0 Then
             Dim angle As New Angle(GlobalVar.getBeta.getMainAngle + GlobalVar.getBeta.getDAngle, False)

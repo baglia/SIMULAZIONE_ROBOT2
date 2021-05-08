@@ -3,7 +3,7 @@
         Dim alpha As Double
         Dim beta As Double
         alpha = calcPhase(_point) + Math.Acos((Math.Pow(GlobalVar.getLength1(), 2) + Math.Pow(calcModule(_point), 2) - Math.Pow(GlobalVar.getLength2(), 2)) / (2 * GlobalVar.getLength1() * calcModule(_point)))
-        beta = Math.Acos((Math.Pow(GlobalVar.getLength1(), 2) - Math.Pow(calcModule(_point), 2) + Math.Pow(GlobalVar.getLength2(), 2)) / (2 * GlobalVar.getLength1() * GlobalVar.getLength2())) + alpha - Math.PI
+        beta = Math.Acos((Math.Pow(GlobalVar.getLength1(), 2) - Math.Pow(calcModule(_point), 2) + Math.Pow(GlobalVar.getLength2(), 2)) / (2 * CDbl(GlobalVar.getLength1()) * GlobalVar.getLength2())) + alpha - Math.PI
         If _isAlpha Then
             GlobalVar.setAlpha(alpha, beta)
         Else

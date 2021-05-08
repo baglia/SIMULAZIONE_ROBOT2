@@ -15,13 +15,13 @@ Public Class Main
     Dim thPopulate As New Threading.Thread(AddressOf populateQueue)
     Dim pointConverter As New CoordinateSystemGraphics
     Dim value As Integer
-    Const _FACTOR As Integer = 2
+    Const _FACTOR As Integer = 2000
     Private Shared LockObject As New Object()
     Private isError As Boolean
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        pointPartenza.setX(0)
-        pointPartenza.setY(0)
+        pointPartenza.setX(370000)
+        pointPartenza.setY(260000)
         pointArrivo.setX(0)
         pointArrivo.setY(0)
         pointTerzoPunto.setX(0)
@@ -34,19 +34,20 @@ Public Class Main
         txtRaggio.Enabled = False
         alpha.setRad(0)
         beta.setRad(Math.PI / 2)
-        numLength1.Value = 370
-        numLength2.Value = 260
+        numLength1.Value = 370000
+        numLength2.Value = 260000
         numStep1.Value = 50000
         numStep2.Value = 25000
-        numVmax.Value = 100
-        numVmin.Value = 10
-        numAmax.Value = 10
-        numTolleranza.Value = 1
+        numVmax.Value = 100000
+        numVmin.Value = 10000
+        numAmax.Value = 100000
+        numTolleranza.Value = 1000
         pointConverter.setValues(panelSimTop.Width / 2, panelSimTop.Height / 2, _FACTOR)
         'TimerSim.Start()
         setParam()
         comboTipoSpostamento.SelectedIndex = 0
         comboAccelerazioneLineare.SelectedIndex = 1
+        Dim d As Double = Math.Acos(370000 ^ 4 / 370001 ^ 4)
     End Sub
 
 
@@ -207,10 +208,10 @@ Public Class Main
             GlobalVar.setIsCycloidal(True)
             GlobalVar.setIsLinear(True)
             GlobalVar.setStart(True)
-            pointPartenza.setX(260)
-            pointPartenza.setY(328)
-            pointArrivo.setX(394)
-            pointArrivo.setY(256)
+            pointPartenza.setX(260000)
+            pointPartenza.setY(328000)
+            pointArrivo.setX(394000)
+            pointArrivo.setY(256000)
             GlobalVar.setStartPoint(pointPartenza)
             GlobalVar.setEndPoint(pointArrivo)
             GlobalVar.setDAlpha(numStep1.Value)

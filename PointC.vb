@@ -43,7 +43,7 @@
     End Function
 
     Public Function isEqual(_pointC As PointC) As Boolean
-        If Math.Round(getX, 3) = Math.Round(_pointC.getX, 3) And Math.Round(getY, 3) = Math.Round(_pointC.getY, 3) Then
+        If Math.Round(getX, 0) = Math.Round(_pointC.getX, 0) And Math.Round(getY, 0) = Math.Round(_pointC.getY, 0) Then
             Return True
         End If
         Return False

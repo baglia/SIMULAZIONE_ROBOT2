@@ -44,10 +44,18 @@
         periods1.Enqueue(_movementLinear.getNextPeriodA(True))
         periods2.Enqueue(_movementLinear.getNextPeriodB(True))
         While (True)
-            period1.copy(_movementLinear.getNextPeriodA(False))
-            period2.copy(_movementLinear.getNextPeriodB(False))
-            periods1.Enqueue(period1)
-            periods2.Enqueue(period2)
+            If periods2.Count < 1000 And Not period2.getIsEnd Then
+                period2.copy(_movementLinear.getNextPeriodB(False))
+                periods2.Enqueue(period2)
+            Else
+                Dim a As Integer = 22
+            End If
+            If periods1.Count < 1000 And Not period1.getIsEnd Then
+                period1.copy(_movementLinear.getNextPeriodA(False))
+                periods1.Enqueue(period1)
+            Else
+                Dim a As Integer = 22
+            End If
             If period1.getIsEnd And period2.getIsEnd Then
                 Exit While
             End If
