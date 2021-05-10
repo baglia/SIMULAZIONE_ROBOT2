@@ -1,5 +1,5 @@
 ﻿Public Class Period
-    Private period As Integer
+    Private period As Double
     Private isPeriod As Boolean
     Private isEnd As Boolean
 
@@ -7,7 +7,7 @@
 
     End Sub
 
-    Public Sub New(_period As Integer)
+    Public Sub New(_period As Double)
         period = _period
         isPeriod = True
         isEnd = False
@@ -28,7 +28,7 @@
         copy(_period)
     End Sub
 
-    Public Sub setPeriod(_period As Integer)
+    Public Sub setPeriod(_period As Double)
         period = _period
     End Sub
     Public Sub setIsPeriod(_isPeriod As Boolean)
@@ -38,7 +38,7 @@
         isEnd = _isEnd
     End Sub
 
-    Public Function getPeriod() As Integer
+    Public Function getPeriod() As Double
         Return period
     End Function
 

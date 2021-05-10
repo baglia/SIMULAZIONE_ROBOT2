@@ -85,7 +85,7 @@
         If Geometry.pointDistance(point, lastPoint) < GlobalVar.getTolerance Then
             Return New Period(True, False)
         End If
-        Return New Period(CInt((GlobalVar.getAlpha.getDAngle / omega) * 1000))
+        Return New Period((GlobalVar.getAlpha.getDAngle / omega) * 1000)
     End Function
 
     Public Function getNextPeriodB(_isNew As Boolean) As Period
@@ -122,7 +122,7 @@
         If Geometry.pointDistance(point, lastPoint) < GlobalVar.getTolerance Then
             Return New Period(True, False)
         End If
-        Return New Period(CInt((GlobalVar.getBeta.getDAngle / omega) * 1000))
+        Return New Period((GlobalVar.getBeta.getDAngle / omega) * 1000)
     End Function
 
 End Class

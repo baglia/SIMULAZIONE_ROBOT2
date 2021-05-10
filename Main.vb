@@ -40,7 +40,7 @@ Public Class Main
         numStep2.Value = 25000
         numVmax.Value = 100000
         numVmin.Value = 10000
-        numAmax.Value = 100000
+        numAmax.Value = 100
         numTolleranza.Value = 1000
         pointConverter.setValues(panelSimTop.Width / 2, panelSimTop.Height / 2, _FACTOR)
         'TimerSim.Start()
@@ -188,6 +188,7 @@ Public Class Main
                 'Threading.Thread.Sleep(period.getPeriod)
             Else
                 'Threading.Thread.Sleep(Math.Abs(period.getPeriod))
+
                 beta.setRad(beta.getRad - GlobalVar.getBeta.getDAngle)
             End If
 
@@ -208,10 +209,10 @@ Public Class Main
             GlobalVar.setIsCycloidal(True)
             GlobalVar.setIsLinear(True)
             GlobalVar.setStart(True)
-            pointPartenza.setX(260000)
-            pointPartenza.setY(328000)
-            pointArrivo.setX(394000)
-            pointArrivo.setY(256000)
+            'pointPartenza.setX(260000)
+            'pointPartenza.setY(328000)
+            'pointArrivo.setX(394000)
+            'pointArrivo.setY(256000)
             GlobalVar.setStartPoint(pointPartenza)
             GlobalVar.setEndPoint(pointArrivo)
             GlobalVar.setDAlpha(numStep1.Value)
