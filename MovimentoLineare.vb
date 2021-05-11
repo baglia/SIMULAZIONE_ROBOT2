@@ -68,7 +68,6 @@
 
         If isTrapezoidal Then
             vel.Modul = trapezoidal.getSpeed(Geometry.pointDistance(point, firstPoint))
-
         Else
             vel.Modul = cicloidale.getSpeed(Geometry.pointDistance(point, firstPoint))
         End If

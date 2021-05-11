@@ -1,5 +1,5 @@
 ﻿Module Cinematica
-    Public Sub calcAngles(_point As PointC, _isAlpha As Boolean) 'VERIFICATO
+    Public Sub calcAngles(_point As PointC, _isAlpha As Boolean) 'calcola gli angoli dei due link mettendoli nelle variabili globali
         Dim alpha As Double
         Dim beta As Double
         alpha = calcPhase(_point) + Math.Acos((Math.Pow(GlobalVar.getLength1(), 2) + Math.Pow(calcModule(_point), 2) - Math.Pow(GlobalVar.getLength2(), 2)) / (2 * GlobalVar.getLength1() * calcModule(_point)))
