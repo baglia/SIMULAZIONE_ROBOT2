@@ -1,5 +1,5 @@
 ﻿Public Class Circle
-    Private pointCenter As PointC
+    Private pointCenter As New PointC
     Private radius As Double
 
 
@@ -19,6 +19,11 @@
         radius = _radius
         Return True
     End Function
+
+    Public Sub calculateCircle(_center As PointC, _radius As Double)
+        pointCenter.copy(_center)
+        radius = _radius
+    End Sub
 
     Public Function calculateCircle(_point1 As PointC, _point2 As PointC, _point3 As PointC) As Double
 
@@ -53,6 +58,19 @@
         Return tangent(point)
     End Function
 
+    Public Function getIntersections(_line As Line)
+        Dim a As Double = 1 + Math.Pow(_line.getSlope, 2)
+        Dim b As Double = -2 * pointCenter.getX + 2 * _line.getSlope * (_line.getOffset - pointCenter.getY)
+        Dim c As Double = Math.Pow(pointCenter.getX, 2) + Math.Pow(_line.getOffset - pointCenter.getY, 2) - Math.Pow(radius, 2)
+        Dim points(2) As PointC
+        points(0) = New PointC
+        points(1) = New PointC
+        points(0).setX(QuadraticEquation.solve(a, b, c, 1))
+        points(0).setY(_line.Y(points(0).getX))
+        points(1).setX(QuadraticEquation.solve(a, b, c, -1))
+        points(1).setY(_line.Y(points(1).getX))
+        Return points
+    End Function
     Public Function isOnCircle(_point As PointC) As Boolean
         If Geometry.pointDistance(pointCenter, _point) = radius Then
             Return True

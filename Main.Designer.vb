@@ -71,6 +71,7 @@ Partial Class Main
         Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
         Me.NumericUpDown2 = New System.Windows.Forms.NumericUpDown()
         Me.Button2 = New System.Windows.Forms.Button()
+        Me.Label15 = New System.Windows.Forms.Label()
         Me.grpSimulazione.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.sliderVelocità, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -547,11 +548,21 @@ Partial Class Main
         Me.Button2.Text = "Button2"
         Me.Button2.UseVisualStyleBackColor = True
         '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(1018, 276)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(59, 17)
+        Me.Label15.TabIndex = 19
+        Me.Label15.Text = "Label15"
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1162, 599)
+        Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.NumericUpDown2)
         Me.Controls.Add(Me.NumericUpDown1)
@@ -634,4 +645,5 @@ Partial Class Main
     Friend WithEvents NumericUpDown1 As NumericUpDown
     Friend WithEvents NumericUpDown2 As NumericUpDown
     Friend WithEvents Button2 As Button
+    Friend WithEvents Label15 As Label
 End Class

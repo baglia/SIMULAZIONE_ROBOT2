@@ -5,8 +5,14 @@
     Private cicloidale As New Cicloidale()
     Private trapezoidal As New Trapezoidal()
     Private isTrapezoidal As Boolean
+    Dim fileA As System.IO.StreamWriter
+    Dim fileB As System.IO.StreamWriter
+    Dim dataA, dataB As String
+
+
 
     Public Sub New()
+        creazioneFile()
     End Sub
 
     Public Sub New(_firstPoint As PointC, _lastpoint As PointC, _cycloidal As Cicloidale)
@@ -15,6 +21,7 @@
         targetLine.calculateLine(firstPoint, lastPoint)
         cicloidale.copy(_cycloidal)
         isTrapezoidal = False
+        creazioneFile()
     End Sub
 
     Public Sub New(_firstPoint As PointC, _lastpoint As PointC, _trapezoidal As Trapezoidal)
@@ -23,6 +30,13 @@
         targetLine.calculateLine(firstPoint, lastPoint)
         trapezoidal.copy(_trapezoidal)
         isTrapezoidal = True
+        creazioneFile()
+    End Sub
+
+    Private Sub creazioneFile()
+        fileA = My.Computer.FileSystem.OpenTextFileWriter("D:\fileA.txt", True)
+        fileB = My.Computer.FileSystem.OpenTextFileWriter("D:\fileB.txt", True)
+
     End Sub
 
     Public Function setMovement(_firstPoint As PointC, _lastPoint As PointC, _legge As Cicloidale)
@@ -81,6 +95,8 @@
             Cinematica.calcBeta(angle, targetLine, point, lastPoint, True)
         End If
         point.copy(Cinematica.calcPointFromAngles(GlobalVar.getAlpha.getMainAngle, GlobalVar.getAlpha.getSecondAngle))
+        fileB.WriteLine(point.getX.ToString + ";" + point.getY.ToString + ";")
+        'fileB.WriteLine(GlobalVar.getAlpha.getMainAngle.ToString + ";" + GlobalVar.getAlpha.getSecondAngle.ToString + ";")
         If Geometry.pointDistance(point, lastPoint) < GlobalVar.getTolerance Then
             Return New Period(True, False)
         End If
@@ -118,6 +134,8 @@
             Cinematica.calcAlpha(angle, targetLine, point, lastPoint, False)
         End If
         point.copy(Cinematica.calcPointFromAngles(GlobalVar.getBeta.getSecondAngle, GlobalVar.getBeta.getMainAngle))
+        fileA.WriteLine(point.getX.ToString + ";" + point.getY.ToString + ";")
+
         If Geometry.pointDistance(point, lastPoint) < GlobalVar.getTolerance Then
             Return New Period(True, False)
         End If

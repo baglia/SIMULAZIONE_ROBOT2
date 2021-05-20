@@ -1,19 +1,20 @@
 ﻿Public Class Scheduling
     Private periods1 As New Queue(Of Period)
     Private periods2 As New Queue(Of Period)
-
+    'Dim fileA As System.IO.StreamWriter
+    'Dim fileB As System.IO.StreamWriter
 
 
     Public Function getPeriod1() As Period
-        If periods1.Count = 0 Then
-            Return New Period(False)
+        If periods1.Count <= 0 Then
+            Return New Period(False, False)
         End If
         Return periods1.Dequeue()
     End Function
 
     Public Function getPeriod2() As Period
-        If periods2.Count = 0 Then
-            Return New Period(False)
+        If periods2.Count <= 0 Then
+            Return New Period(False, False)
         End If
         Return periods2.Dequeue()
     End Function
@@ -21,6 +22,10 @@
     Public Sub startCalcLoop()
         If GlobalVar.getStart Then
             'setup
+
+            'fileA = My.Computer.FileSystem.OpenTextFileWriter("D:\fileA.txt", True)
+            'fileB = My.Computer.FileSystem.OpenTextFileWriter("D:\fileB.txt", True)
+
             Dim trap As New Trapezoidal(GlobalVar.getMaxSpeed, GlobalVar.getDistance, GlobalVar.getMaxAccel)
             Dim cyc As New Cicloidale(GlobalVar.getMaxSpeed, GlobalVar.getDistance)
             Dim movementLinear As New MovimentoLineare()
@@ -46,6 +51,7 @@
         While (True)
             If periods2.Count < 1000 And Not period2.getIsEnd Then
                 period2.copy(_movementLinear.getNextPeriodB(False))
+                'fileB.WriteLine(GlobalVar.getAlpha.getMainAngle.ToString + ";" + GlobalVar.getBeta.getMainAngle.ToString + ";")
                 periods2.Enqueue(period2)
             Else
                 Dim a As Integer = 22

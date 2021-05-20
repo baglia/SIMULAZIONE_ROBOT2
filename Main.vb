@@ -18,6 +18,9 @@ Public Class Main
     Const _FACTOR As Integer = 2000
     Private Shared LockObject As New Object()
     Private isError As Boolean
+    Private period1Millis = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()
+    Private period2Millis = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()
+    Private limiteInterno As New Circle
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         pointPartenza.setX(370000)
@@ -47,7 +50,7 @@ Public Class Main
         setParam()
         comboTipoSpostamento.SelectedIndex = 0
         comboAccelerazioneLineare.SelectedIndex = 1
-        Dim d As Double = Math.Acos(370000 ^ 4 / 370001 ^ 4)
+        limiteInterno.calculateCircle(New PointC(0, 0), GlobalVar.getLength1 - GlobalVar.getLength2)
     End Sub
 
 
@@ -139,10 +142,10 @@ Public Class Main
         Dim period As New Period()
         While True
             period.copy(scheduler.getPeriod1())
-            value += 1
 
+            'If period1Millis <= DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() Then
             If Not period.getIsPeriod And Not period.getIsEnd Then
-                'Threading.Thread.Sleep(0)
+
             ElseIf Not period.getIsPeriod And period.getIsEnd Then
                 thPeriod2.Abort()
                 isEndMovement = True
@@ -153,15 +156,15 @@ Public Class Main
                 isEndMovement = True
                 Return
             ElseIf period.getPeriod > 0 Then
-                'Threading.Thread.Sleep(period.getPeriod)
+                'period1Millis = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() + period.getPeriod
                 alpha.setRad(alpha.getRad + GlobalVar.getAlpha.getDAngle)
-            ElseIf period.getPeriod = 0 Then
-                'Threading.Thread.Sleep(period.getPeriod)
+                'ElseIf period.getPeriod = 0 Then
+                ' period1Millis = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() + 0
             Else
-                'Threading.Thread.Sleep(Math.Abs(period.getPeriod))
+                'period1Millis = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() + Math.Abs(period.getPeriod)
                 alpha.setRad(alpha.getRad - GlobalVar.getAlpha.getDAngle)
             End If
-
+            'End If
         End While
     End Sub
 
@@ -188,7 +191,6 @@ Public Class Main
                 'Threading.Thread.Sleep(period.getPeriod)
             Else
                 'Threading.Thread.Sleep(Math.Abs(period.getPeriod))
-
                 beta.setRad(beta.getRad - GlobalVar.getBeta.getDAngle)
             End If
 
@@ -206,6 +208,7 @@ Public Class Main
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If isEndMovement Then
+
             GlobalVar.setIsCycloidal(True)
             GlobalVar.setIsLinear(True)
             GlobalVar.setStart(True)
@@ -217,6 +220,14 @@ Public Class Main
             GlobalVar.setEndPoint(pointArrivo)
             GlobalVar.setDAlpha(numStep1.Value)
             GlobalVar.setDBeta(numStep2.Value)
+            Dim targetLine As New Line(pointPartenza, pointArrivo)
+            Dim points(1) As PointC
+            points = limiteInterno.getIntersections(targetLine)
+            If pointDistance(pointPartenza, pointArrivo) > pointDistance(pointPartenza, points(0)) And pointDistance(pointPartenza, pointArrivo) > pointDistance(pointArrivo, points(0)) Then
+                Dim a As Integer = 22
+            ElseIf pointDistance(pointPartenza, pointArrivo) > pointDistance(pointPartenza, points(1)) And pointDistance(pointPartenza, pointArrivo) > pointDistance(pointArrivo, points(1)) Then
+                Dim a As Integer = 22
+            End If
             startCompute()
             setParam()
         End If
